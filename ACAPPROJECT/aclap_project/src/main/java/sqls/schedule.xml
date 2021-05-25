@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="bit.com.a.dao.scheduleDao" >
+  
+
+  
+  
+  <!-- mypage.html 에서 해당 월에 schedule을 얻어오기 위함 -->
+
+
+<select resultType="bit.com.a.dto.scheduleDto" parameterType="bit.com.a.dto.scheduleDto" id="getMySchedule">
+SELECT SCHEDULENUM, RDATE, MEMNUM, S.CLASSNUM, S.DEL, O.INSTRUCTOR, O.TITLE, O.INFORMATION
+FROM SCHEDULE S, ONEDAYCLASS O
+WHERE S.CLASSNUM = O.CLASSNUM AND MEMNUM=#{ memNum } AND SUBSTR(RDATE, 1, 7)=#{ rdate } ORDER BY RDATE ASC </select>
+
+<!-- mypage.html에서 master에 schedule을 얻어오기 위함 -->
+
+
+ <select id="myclsScheduleData" parameterType="Integer" resultType="bit.com.a.dto.scheduleDto">
+  SELECT  S.RDATE as RDATE, S.SCHEDULENUM AS SCHEDULENUM, M.USERNAME AS NAME, S.CLASSNUM AS CLASSNUM, O.TITLE AS TITLE 
+  FROM SCHEDULE S, ONEDAYCLASS O, ACLAPMEMBER M
+  WHERE S.CLASSNUM = O.CLASSNUM AND #{memNum} = O.MASTERNUM AND M.MEMNUM = S.MEMNUM
+  
+  </select>
+
+<!-- mypage.html에서 신청한 수업 count -->
+
+
+<select resultType="Integer" parameterType="bit.com.a.dto.scheduleDto" id="regiCount">
+SELECT COUNT(*)
+FROM SCHEDULE
+WHERE RDATE &gt;= #{ rdate } AND MEMNUM = #{memNum} </select>
+
+<!-- mypage.html에서 수강한 수업 count -->
+
+
+<select resultType="Integer" parameterType="bit.com.a.dto.scheduleDto" id="appendCount">
+SELECT COUNT(*)
+FROM SCHEDULE
+WHERE RDATE &lt; #{ rdate } AND MEMNUM = #{memNum} 
+</select>
+  
+  
+  
+  
+  </mapper>
