@@ -3,6 +3,9 @@ package bit.com.a.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -229,6 +232,24 @@ public class aclapMemberController {
 			System.out.println("memberDropOut Success!");
 		return n;
 	}
+	
+	// TODO 포인트 충전
+	@RequestMapping(value="/chargePoints", method = {RequestMethod.GET, RequestMethod.POST})
+	public void chargePoints(aclapMemberDto dto, int money ) {
+		System.out.println("aclapMemberController chargePoints 왔음" + new Date());
+		System.out.println("이메일" + dto.getEmail() + " 충전할 돈 " + money );
+		
+		Map<String, Object> chargePoints = new HashMap<String, Object>();
+		String email = dto.getEmail();
+		
+		chargePoints.put("email", email);
+		chargePoints.put("money", money);
+		
+		
+		service.chargePoints(chargePoints);
+		
+	}
+	
 		
 	
 }
