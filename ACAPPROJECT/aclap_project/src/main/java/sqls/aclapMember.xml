@@ -122,11 +122,13 @@
 	WHERE MEMNUM = #{ memNum }
 </select>
 
+
 <update id="chargePoints" parameterType="HashMap">
 	UPDATE ACLAPMEMBER
 	SET MYPOINT=MYPOINT+#{money}
 	WHERE EMAIL=#{email}
 </update>
+
 
 
 </mapper>
