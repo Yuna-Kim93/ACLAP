@@ -1,6 +1,8 @@
 package bit.com.a.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +57,10 @@ public class aclapMemberService {
 	}
 	public aclapMemberDto myinfo(aclapMemberDto dto) {
 		return aclapMemberDao.myinfo(dto);
+	}
+	
+	public void chargePoints(Map<String, Object> chargePoints) {
+		aclapMemberDao.chargePoints(chargePoints);
 	}
 
 }
