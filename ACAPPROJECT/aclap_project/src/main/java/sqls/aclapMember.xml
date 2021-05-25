@@ -104,16 +104,25 @@
 	</update>
 	
 	<!-- 선호도조사 -->
-	<update id="getInterestUpdate" parameterType="bit.com.a.dto.aclapMemberDto">		
+	<update id="setInterest" parameterType="bit.com.a.dto.aclapMemberDto">		
 		UPDATE ACLAPMEMBER
-		SET INTEREST1=#{interest1} AND 
-		    INTEREST2=#{interest2} AND 
-		    INTEREST3=#{interest3}
-		WHERE MEMNUM=#{memNum}
+		SET INTEREST1=#{interest1} 
+
+		<if test="interest2 != null and interest2 != ''">, INTEREST2=#{interest2}</if>
+		<if test="interest3 != null and interest3 != ''">, INTEREST3=#{interest3}</if>    
+		    
+		WHERE MEMNUM=${memNum}
 	</update>
 	
 
-	
+	<!-- mypage.html에서 나의 정보를 얻어오기위함 -->
+<select id="myinfo" parameterType="bit.com.a.dto.aclapMemberDto" resultType="bit.com.a.dto.aclapMemberDto">
+	SELECT MEMNUM, EMAIL, PWD, USERNAME, NICKNAME, PHONENUM, INTEREST1, INTEREST2, INTEREST3, PROFILEPIC, AUTH, CLASSMASTER, MYPOINT
+	FROM ACLAPMEMBER
+	WHERE MEMNUM = #{ memNum }
+</select>
+
+
 </mapper>
 <!-- 
 	private int memNum;
