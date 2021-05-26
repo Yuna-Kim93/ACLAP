@@ -1,6 +1,8 @@
 package bit.com.a.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -27,6 +29,8 @@ public interface aclapMemberDao {
 	// 마이페이지_회원탈퇴
 	public int memberDropOut(aclapMemberDto dto);
 	public void setInterest(aclapMemberDto dto);
+	//관리자페이지 유저 리스트
 	public List<aclapMemberDto> memlist(aclapParam par);
-
+	// 포인트충전 업데이트
+	public void chargePoints (Map<String, Object> chargePoints);
 }

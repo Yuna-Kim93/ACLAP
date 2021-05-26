@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.com.a.dao.onedayClassDao">
+
+<select id="getOnedayClass" parameterType="bit.com.a.dto.onedayClassDto" resultType="bit.com.a.dto.onedayClassDto">
+	SELECT CLASSNUM, MASTERNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, CONTENT, STARTDATE, ENDDATE, PRICE, INFORMATION, DURATION, LIMITNUM, PREPARATION,
+		ABOUTME, IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINKE, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM, A.PROFILEPIC
+	FROM ONEDAYCLASS O, ACLAPMEMBER A
+	WHERE CLASSNUM = #{classNum}
+</select>
+
+</mapper>
