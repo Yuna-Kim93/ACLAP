@@ -12,4 +12,48 @@
 	WHERE CLASSNUM = #{classNum}
 </select>
 
+
+<select id="classListData" parameterType="bit.com.a.dto.oneDayClassParam" resultType="bit.com.a.dto.onedayClassDto">
+
+SELECT O.TITLE AS TITLE, O.INSTRUCTOR AS INSTRUCTOR, O.INFORMATION AS INFORMATION, O.DURATION AS DURATION, O.LIMITNUM AS LIMITNUM, O.LIKECOUNT AS LIKECOUNT, 
+AVGPOINT, O.STARTDATE AS STARTDATE, O.ENDDATE AS ENDDATE
+FROM (SELECT R.CLASSNUM, AVG(STARPOINT) AS AVGPOINT
+        FROM REVIEW R, ONEDAYCLASS O
+        WHERE R.CLASSNUM = O.CLASSNUM AND O.PRIMARYCATEGORY LIKE '%'||#{primaryCategory}||'%'
+        GROUP BY R.CLASSNUM) R, ONEDAYCLASS O
+
+<if test="choice == null or choice == '' and search == null or search == ''">
+WHERE R.CLASSNUM = O.CLASSNUM
+ORDER BY O.LIKECOUNT DESC
+</if>
+<if test="choice != null and choice != '' and search != null and search != ''">
+
+<if test="choice == 'orderByLike'">WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' ORDER BY O.LIKECOUNT DESC</if>
+
+<if test="choice == 'orderByRecent'">WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' ORDER BY O.CLASSNUM DESC</if>
+
+<if test="choice == 'orderByAvg'">WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' ORDER BY AVGPOINT DESC </if>
+</if>
+
+
+</select>
+
+
+<!-- 나의 도장판 현황 -->
+<select id="myStampList" parameterType="Map" resultType="bit.com.a.dto.myStampDto">
+	SELECT MYSTAMPNUM, MEMNUM, CLASSNUM, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE
+	FROM (SELECT ROW_NUMBER()OVER(ORDER BY MYSTAMPNUM ASC) AS RNUM, MYSTAMPNUM, MEMNUM, CLASSNUM, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE
+		FROM MYSTAMP )  
+	WHERE MEMNUM = #{memNum} AND 
+			RNUM&gt;=1+10*#{ pageNum } AND RNUM&lt;=10+10*#{ pageNum }
+</select>
+
+<!-- 도장 갯수 -->
+<select id="stampCount" parameterType="bit.com.a.dto.myStampDto" resultType="Integer">
+	SELECT COUNT(*)
+	FROM MYSTAMP
+	WHERE MEMNUM = #{memNum}
+</select>
+
+
 </mapper>
