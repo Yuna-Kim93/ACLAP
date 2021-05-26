@@ -39,4 +39,21 @@ ORDER BY O.LIKECOUNT DESC
 </select>
 
 
+<!-- 나의 도장판 현황 -->
+<select id="myStampList" parameterType="Map" resultType="bit.com.a.dto.myStampDto">
+	SELECT MYSTAMPNUM, MEMNUM, CLASSNUM, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE
+	FROM (SELECT ROW_NUMBER()OVER(ORDER BY MYSTAMPNUM ASC) AS RNUM, MYSTAMPNUM, MEMNUM, CLASSNUM, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE
+		FROM MYSTAMP )  
+	WHERE MEMNUM = #{memNum} AND 
+			RNUM&gt;=1+10*#{ pageNum } AND RNUM&lt;=10+10*#{ pageNum }
+</select>
+
+<!-- 도장 갯수 -->
+<select id="stampCount" parameterType="bit.com.a.dto.myStampDto" resultType="Integer">
+	SELECT COUNT(*)
+	FROM MYSTAMP
+	WHERE MEMNUM = #{memNum}
+</select>
+
+
 </mapper>

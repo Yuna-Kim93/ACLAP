@@ -118,14 +118,14 @@ public class adminController {
 			return list;
 		}
 		//--------------------------------클래스 갯수 카운트 리턴--------------------------//
-
+		/*
 		@RequestMapping(value = "/classCount", method = {RequestMethod.GET, RequestMethod.POST})
 		public int classCount(onedayParam par) {
 			System.out.println("onedayClassController classCount()" + new Date());
-			int count = onedayClassService.classCount(par);
+			// int count = onedayClassService.classCount(par);
 			return count;
 		}
-		
+		*/
 		
 		
 }
