@@ -1,10 +1,14 @@
 package bit.com.a.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import bit.com.a.dto.oneDayClassParam;
 import bit.com.a.dto.onedayClassDto;
 import bit.com.a.mail.MailSend;
 import bit.com.a.service.onedayClassService;
@@ -40,4 +44,25 @@ public class onedayClassController {
 			System.out.println("Mail send Fail!");
 		return b;
 	}
+	
+	
+	
+	
+	// 클래스 카테고리별 뷰 에서 클래스 리스트 가져오기
+	@RequestMapping(value="/classListData", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<onedayClassDto> classListData(oneDayClassParam param){
+		System.out.println("oneDayClassController classListData()" + new Date());
+		
+		System.out.println("파라미터 확인"+ param);
+		
+		
+		List<onedayClassDto> cList = onedayClassService.classListData(param);
+		
+		return cList;
+		
+	}
+	
+	
+	
+	
 }
