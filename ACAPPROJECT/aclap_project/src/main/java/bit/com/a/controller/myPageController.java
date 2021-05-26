@@ -1,8 +1,11 @@
 package bit.com.a.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,22 +13,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import bit.com.a.dto.aclapMemberDto;
+import bit.com.a.dto.myStampDto;
 import bit.com.a.dto.scheduleDto;
 import bit.com.a.service.aclapMemberService;
 import bit.com.a.service.myPageService;
+import bit.com.a.service.onedayClassService;
 import bit.com.a.service.scheduleService;
 
 @RestController
-public class myPageController {
-
-	@Autowired
-	myPageService myPageService;
-	
+public class myPageController {	
 	@Autowired
 	aclapMemberService aclapMemberService;
 	
 	@Autowired
 	scheduleService scheduleService;
+	
+	@Autowired
+	onedayClassService onedayClassService;
 	
 	@RequestMapping(value = "/myinfo", method = RequestMethod.POST)
 	public aclapMemberDto myinfo(aclapMemberDto dto) {
@@ -64,4 +68,30 @@ public class myPageController {
 		return myinfo;
 	}
 	
+	// 나의 도장 현황
+	@RequestMapping(value = "/myStampList", method = RequestMethod.POST)
+	public List<myStampDto> myStampList(int memNum, int pageNum){
+		System.out.println("myStampList memNum = " + memNum + ", " + pageNum);
+		
+		List<myStampDto> list = new ArrayList<myStampDto>();
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("memNum", memNum);
+		map.put("pageNum", pageNum);
+		
+		list = onedayClassService.myStampList(map);
+		System.out.println("myStampList list = " + list.toString());
+		
+		return list;
+	}
+	
+	// 나의 도장 갯수
+	@RequestMapping(value = "/stampCount", method = RequestMethod.GET)
+	public int stampCount(myStampDto dto) {
+		System.out.println("stampCount dto = " + dto.toString());
+		
+		int count = onedayClassService.stampCount(dto);
+		System.out.println("count = " + count);
+		return count;
+	}
 }
