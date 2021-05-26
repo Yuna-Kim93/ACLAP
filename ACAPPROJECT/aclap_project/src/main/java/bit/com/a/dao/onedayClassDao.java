@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import bit.com.a.dto.oneDayClassParam;
 import bit.com.a.dto.onedayClassDto;
 import bit.com.a.dto.onedayParam;
 
@@ -18,4 +19,7 @@ public interface onedayClassDao {
 		
 	//my page
 		public onedayClassDto getOnedayClass(onedayClassDto dto);
+		
+		//클래스 리스트 가져오기
+		public List<onedayClassDto> classListData(oneDayClassParam param);
 }

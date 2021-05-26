@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import bit.com.a.dao.onedayClassDao;
+import bit.com.a.dto.oneDayClassParam;
 import bit.com.a.dto.onedayClassDto;
 import bit.com.a.dto.onedayParam;
 
@@ -37,6 +38,10 @@ public class onedayClassService {
 		onedayClassDto oClass = onedayClassDao.getOnedayClass(dto);
 		System.out.println("onedayClassService oClass = " + oClass.toString());
 		return oClass;
+	}
+
+	public List<onedayClassDto> classListData(oneDayClassParam param) {
+		return onedayClassDao.classListData(param);
 	}
 	
 }

@@ -63,4 +63,10 @@ public class aclapMemberService {
 		aclapMemberDao.chargePoints(chargePoints);
 	}
 
+	
+	//선호도
+	public void setInterest(aclapMemberDto dto) {
+		aclapMemberDao.setInterest(dto);
+		
+	};
 }

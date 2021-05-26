@@ -28,6 +28,7 @@ public interface aclapMemberDao {
 	public int myPageUserUpdate(aclapMemberDto dto);
 	// 마이페이지_회원탈퇴
 	public int memberDropOut(aclapMemberDto dto);
+	//선호도
 	public void setInterest(aclapMemberDto dto);
 	//관리자페이지 유저 리스트
 	public List<aclapMemberDto> memlist(aclapParam par);
