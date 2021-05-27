@@ -29,6 +29,9 @@ public class onedayClassDto {
 	   
 	   private String profilePic; // master의 프로필 사진 
 	   
+	   
+	   private int avgPoint;
+	   
 	   public onedayClassDto() {
 	      // TODO Auto-generated constructor stub
 	   }
@@ -65,6 +68,42 @@ public class onedayClassDto {
 		this.oldRegNum = oldRegNum;
 		this.newRegNum = newRegNum;
 		this.profilePic = profilePic;
+	}
+	
+	//avgPoint포함된것
+	public onedayClassDto(int classNum, int masterNum, String instructor, String primaryCategory,
+			String secondaryCategory, String title, String startDate, String endDate, int price, String information,
+			String duration, String limitNum, String preparation, String aboutMe, String image1, String image2,
+			String image3, String image4, String image5, String location, String youtubeLinke, int likeCount, int del,
+			int oldRegNum, int newRegNum, String profilePic, int avgPoint) {
+		super();
+		this.classNum = classNum;
+		this.masterNum = masterNum;
+		this.instructor = instructor;
+		this.primaryCategory = primaryCategory;
+		this.secondaryCategory = secondaryCategory;
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.price = price;
+		this.information = information;
+		this.duration = duration;
+		this.limitNum = limitNum;
+		this.preparation = preparation;
+		this.aboutMe = aboutMe;
+		this.image1 = image1;
+		this.image2 = image2;
+		this.image3 = image3;
+		this.image4 = image4;
+		this.image5 = image5;
+		this.location = location;
+		this.youtubeLinke = youtubeLinke;
+		this.likeCount = likeCount;
+		this.del = del;
+		this.oldRegNum = oldRegNum;
+		this.newRegNum = newRegNum;
+		this.profilePic = profilePic;
+		this.avgPoint = avgPoint;
 	}
 
 	public int getClassNum() {
@@ -274,6 +313,16 @@ public class onedayClassDto {
 	public void setProfilePic(String profilePic) {
 		this.profilePic = profilePic;
 	}
+	
+	
+	
+	public int getAvgPoint() {
+		return avgPoint;
+	}
+
+	public void setAvgPoint(int avgPoint) {
+		this.avgPoint = avgPoint;
+	}
 
 	@Override
 	public String toString() {
@@ -284,6 +333,8 @@ public class onedayClassDto {
 				+ ", aboutMe=" + aboutMe + ", image1=" + image1 + ", image2=" + image2 + ", image3=" + image3
 				+ ", image4=" + image4 + ", image5=" + image5 + ", location=" + location + ", youtubeLinke="
 				+ youtubeLinke + ", likeCount=" + likeCount + ", del=" + del + ", oldRegNum=" + oldRegNum
-				+ ", newRegNum=" + newRegNum + ", profilePic=" + profilePic + "]";
-	}   
+				+ ", newRegNum=" + newRegNum + ", profilePic=" + profilePic + ", avgPoint=" + avgPoint + "]";
+	}
+
+	
 }

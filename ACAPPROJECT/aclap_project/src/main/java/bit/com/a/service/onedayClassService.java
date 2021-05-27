@@ -46,9 +46,7 @@ public class onedayClassService {
 		return oClass;
 	}
 
-	public List<onedayClassDto> classListData(oneDayClassParam param) {
-		return onedayClassDao.classListData(param);
-	}
+	
 	
 	// 나의 도장판 현황
 	public List<myStampDto> myStampList(Map<String, Integer> map){
@@ -61,6 +59,17 @@ public class onedayClassService {
 		return onedayClassDao.stampCount(dto);
 	}
 	
+
+	
+	//클래스 리스트 뽑아
+	public List<onedayClassDto> classListData(oneDayClassParam param) {
+		return onedayClassDao.classListData(param);
+	}
+	//클래스 리스트 갯수
+	public int classListCount(oneDayClassParam param) {
+		return onedayClassDao.classListCount(param);
+	}
+
 	//----------------------------home----------------------------------
 	// home : 클래스 최신순 리스트 출력
 	public List<onedayClassDto> getNewestClassList() {
@@ -71,5 +80,6 @@ public class onedayClassService {
 	public List<onedayClassDto> getBestClassList() {
 		return onedayClassDao.getBestClassList();
 	};
+
 	
 }
