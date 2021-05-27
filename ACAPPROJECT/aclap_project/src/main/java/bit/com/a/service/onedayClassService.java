@@ -46,9 +46,7 @@ public class onedayClassService {
 		return oClass;
 	}
 
-	public List<onedayClassDto> classListData(oneDayClassParam param) {
-		return onedayClassDao.classListData(param);
-	}
+	
 	
 	// 나의 도장판 현황
 	public List<myStampDto> myStampList(Map<String, Integer> map){
@@ -59,6 +57,16 @@ public class onedayClassService {
 	// 나의 도장 갯수
 	public int stampCount(myStampDto dto) {
 		return onedayClassDao.stampCount(dto);
+	}
+	
+	
+	//클래스 리스트 뽑아
+	public List<onedayClassDto> classListData(oneDayClassParam param) {
+		return onedayClassDao.classListData(param);
+	}
+	//클래스 리스트 갯수
+	public int classListCount(oneDayClassParam param) {
+		return onedayClassDao.classListCount(param);
 	}
 	
 }

@@ -62,6 +62,18 @@ public class onedayClassController {
 		
 	}
 	
+	//클래스 카테고리별 뷰에서 클래스 글 총수 가져오기
+	@RequestMapping(value="/classListCount", method = {RequestMethod.GET, RequestMethod.POST})
+	public int classListCount(oneDayClassParam param) {
+		System.out.println("oneDayClassController classListCount()" + new Date());
+		
+		int count = onedayClassService.classListCount(param);
+		
+		System.out.println("갯수 확인: " + count);
+		return count;
+		
+	}
+	
 	
 	
 	
