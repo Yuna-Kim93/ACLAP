@@ -59,6 +59,7 @@ public class onedayClassService {
 		return onedayClassDao.stampCount(dto);
 	}
 	
+
 	
 	//클래스 리스트 뽑아
 	public List<onedayClassDto> classListData(oneDayClassParam param) {
@@ -68,5 +69,17 @@ public class onedayClassService {
 	public int classListCount(oneDayClassParam param) {
 		return onedayClassDao.classListCount(param);
 	}
+
+	//----------------------------home----------------------------------
+	// home : 클래스 최신순 리스트 출력
+	public List<onedayClassDto> getNewestClassList() {
+		return onedayClassDao.getNewestClassList();
+	};
+	
+	// home : 클래스 인기순 출력
+	public List<onedayClassDto> getBestClassList() {
+		return onedayClassDao.getBestClassList();
+	};
+
 	
 }

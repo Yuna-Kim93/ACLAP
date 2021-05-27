@@ -39,4 +39,13 @@ public interface onedayClassDao {
 		//클래스 리스트 갯수 가져오기
 		public int classListCount(oneDayClassParam param);
 
+		
+		// home : 클래스 최신순 리스트 출력
+		public List<onedayClassDto> getNewestClassList();
+		
+		// home : 클래스 인기순 출력
+		public List<onedayClassDto> getBestClassList();
+		
+		
+		
 }
