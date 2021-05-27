@@ -61,4 +61,15 @@ public class onedayClassService {
 		return onedayClassDao.stampCount(dto);
 	}
 	
+	//----------------------------home----------------------------------
+	// home : 클래스 최신순 리스트 출력
+	public List<onedayClassDto> getNewestClassList() {
+		return onedayClassDao.getNewestClassList();
+	};
+	
+	// home : 클래스 인기순 출력
+	public List<onedayClassDto> getBestClassList() {
+		return onedayClassDao.getBestClassList();
+	};
+	
 }

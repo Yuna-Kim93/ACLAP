@@ -1,6 +1,7 @@
 package bit.com.a.controller;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +65,26 @@ public class onedayClassController {
 	
 	
 	
+	// Home_클래스 최신순 출력 
+	@RequestMapping(value="/getNewestClassList", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<onedayClassDto> getNewestClassList(){
+		System.out.println("////////// oneDayClassController getNewestClassList() //////////");
+
+		List<onedayClassDto> list = onedayClassService.getNewestClassList();
+		if(list.size() != 0) 
+			System.out.println("getNewestClassList Success");		
+		return list;
+	}
+	
+	// Home_클래스 인기순 출력 
+	@RequestMapping(value="/getBestClassList", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<onedayClassDto> getBestClassList(){
+		System.out.println("////////// oneDayClassController getBestClassList() //////////");
+
+		List<onedayClassDto> list = onedayClassService.getBestClassList();
+		if(list.size() != 0) 
+			System.out.println("getBestClassList Success");		
+		return list;
+	}
 	
 }

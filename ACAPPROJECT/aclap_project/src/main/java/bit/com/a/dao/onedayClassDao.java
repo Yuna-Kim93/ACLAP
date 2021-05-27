@@ -34,4 +34,13 @@ public interface onedayClassDao {
 		// 도장 갯수
 		public int stampCount(myStampDto dto);
 
+		
+		// home : 클래스 최신순 리스트 출력
+		public List<onedayClassDto> getNewestClassList();
+		
+		// home : 클래스 인기순 출력
+		public List<onedayClassDto> getBestClassList();
+		
+		
+		
 }
