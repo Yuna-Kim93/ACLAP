@@ -58,7 +58,7 @@ public class onedayClassController {
 		
 		
 		List<onedayClassDto> cList = onedayClassService.classListData(param);
-		
+		System.out.println("리스트 결과들: " + cList);
 		return cList;
 		
 	}
