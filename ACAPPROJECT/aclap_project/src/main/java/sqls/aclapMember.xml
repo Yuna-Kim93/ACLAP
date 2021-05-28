@@ -116,14 +116,14 @@
 	
 
 	<!-- mypage.html에서 나의 정보를 얻어오기위함 -->
-<select id="myinfo" parameterType="bit.com.a.dto.aclapMemberDto" resultType="bit.com.a.dto.aclapMemberDto">
-	SELECT MEMNUM, EMAIL, PWD, USERNAME, NICKNAME, PHONENUM, INTEREST1, INTEREST2, INTEREST3, PROFILEPIC, AUTH, CLASSMASTER, MYPOINT
-	FROM ACLAPMEMBER
-	WHERE MEMNUM = #{ memNum }
-</select>
+	<select id="myinfo" parameterType="bit.com.a.dto.aclapMemberDto" resultType="bit.com.a.dto.aclapMemberDto">
+		SELECT MEMNUM, EMAIL, PWD, USERNAME, NICKNAME, PHONENUM, INTEREST1, INTEREST2, INTEREST3, PROFILEPIC, AUTH, CLASSMASTER, MYPOINT
+		FROM ACLAPMEMBER
+		WHERE MEMNUM = #{ memNum }
+	</select>
 
 
-<update id="chargePoints" parameterType="HashMap">
+<update id="chargePoints" parameterType="HashMap" >
 	UPDATE ACLAPMEMBER
 	SET MYPOINT=MYPOINT+#{money}
 	WHERE EMAIL=#{email}

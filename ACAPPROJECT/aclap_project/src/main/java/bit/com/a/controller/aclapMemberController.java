@@ -235,7 +235,7 @@ public class aclapMemberController {
 	
 	// TODO 포인트 충전
 	@RequestMapping(value="/chargePoints", method = {RequestMethod.GET, RequestMethod.POST})
-	public void chargePoints(aclapMemberDto dto, int money ) {
+	public int chargePoints(aclapMemberDto dto, int money ) {
 		System.out.println("aclapMemberController chargePoints 왔음" + new Date());
 		System.out.println("이메일" + dto.getEmail() + " 충전할 돈 " + money );
 		
@@ -245,9 +245,12 @@ public class aclapMemberController {
 		chargePoints.put("email", email);
 		chargePoints.put("money", money);
 		
-		
 		service.chargePoints(chargePoints);
 		
+		int mypoint = money + dto.getMyPoint();
+		System.out.println("충전 후 포인트: " + mypoint);
+		
+		return mypoint;
 	}
 	
 	//------------------------------- 관심사 설정완료~------------------------
