@@ -25,13 +25,28 @@ public interface onedayClassDao {
 		public onedayClassDto getOnedayClass(onedayClassDto dto);
 		
 
-		//클래스 리스트 가져오기
-		public List<onedayClassDto> classListData(oneDayClassParam param);
+		
 
 		// 나의 도장판 현황
 		public List<myStampDto> myStampList(Map<String, Integer> map);
 		
 		// 도장 갯수
 		public int stampCount(myStampDto dto);
+		
+		//클래스 리스트 가져오기
+		public List<onedayClassDto> classListData(oneDayClassParam param);
+		
+		//클래스 리스트 갯수 가져오기
+		public int classListCount(oneDayClassParam param);
 
+		
+		// home : 클래스 최신순 리스트 출력
+		public List<onedayClassDto> getNewestClassList();
+		
+		// home : 클래스 인기순 출력
+		public List<onedayClassDto> getBestClassList();
+		
+		
+		// 클래스 생성하기 
+		public int onedayClassWrite();		
 }

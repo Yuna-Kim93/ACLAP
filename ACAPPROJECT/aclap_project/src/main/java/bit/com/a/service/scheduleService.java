@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import bit.com.a.dao.scheduleDao;
+import bit.com.a.dto.classSchedulCount;
+import bit.com.a.dto.classScheduleDto;
+import bit.com.a.dto.onedayClassDto;
 import bit.com.a.dto.scheduleDto;
 
 @Service
@@ -35,5 +38,33 @@ public class scheduleService {
 	public int appendCount(scheduleDto dto) {
 		return scheduleDao.appendCount(dto);	
 	}
+	
+	// classDtail.html에서 classSchedule을 얻기 위함
+	public List<classScheduleDto> classScheduleList(onedayClassDto dto){
+		// classSchedule List
+		List<classScheduleDto> clist = scheduleDao.classScheduleList(dto);
+		
+		// classSchedulCount List
+		List<classSchedulCount> countlist = scheduleDao.classSchedulCount(dto);
+		System.out.println("countlist : " + countlist.toString());
+		
+		for(int i=0; i<clist.size(); i++) {
+			classScheduleDto classdto = clist.get(i);
 
+			// System.out.println((classdto.getRdate()).substring(0, 10));
+			for(int j=0; j<countlist.size();j++) {
+				classSchedulCount count = countlist.get(j);
+				
+				if( (classdto.getRdate()).substring(0, 10).equals(count.getRdate())) {
+					System.out.println("최신화했니?");
+					int limitnum = Integer.parseInt( classdto.getLimitNum() ) - count.getCount();
+					classdto.setLimitNum(Integer.toString( limitnum ));
+					clist.set(i, classdto);
+				}
+			}
+		}
+		System.out.println("완성된 clist : " + clist.toString());
+		return clist;
+	}
+	
 }

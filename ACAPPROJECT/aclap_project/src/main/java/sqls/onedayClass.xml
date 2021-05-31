@@ -9,22 +9,23 @@
 	SELECT CLASSNUM, MASTERNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, CONTENT, STARTDATE, ENDDATE, PRICE, INFORMATION, DURATION, LIMITNUM, PREPARATION,
 		ABOUTME, IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINKE, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM, A.PROFILEPIC
 	FROM ONEDAYCLASS O, ACLAPMEMBER A
-	WHERE CLASSNUM = #{classNum}
+	WHERE O.MASTERNUM = A.MEMNUM 
+		AND CLASSNUM = #{classNum}
 </select>
 
-
+<!-- 클래스 리스트 정렬 -->
 <select id="classListData" parameterType="bit.com.a.dto.oneDayClassParam" resultType="bit.com.a.dto.onedayClassDto">
 
-SELECT O.TITLE AS TITLE, O.INSTRUCTOR AS INSTRUCTOR, O.INFORMATION AS INFORMATION, O.DURATION AS DURATION, O.LIMITNUM AS LIMITNUM, O.LIKECOUNT AS LIKECOUNT, 
-AVGPOINT, O.STARTDATE AS STARTDATE, O.ENDDATE AS ENDDATE
+SELECT O.CLASSNUM AS CLASSNUM, O.TITLE AS TITLE, O.INSTRUCTOR AS INSTRUCTOR, O.INFORMATION AS INFORMATION, O.DURATION AS DURATION, O.LIMITNUM AS LIMITNUM, O.LIKECOUNT AS LIKECOUNT, 
+AVGPOINT, O.STARTDATE AS STARTDATE, O.ENDDATE AS ENDDATE, O.LOCATION AS LOCATION, O.PRIMARYCATEGORY AS PRIMARYCATEGORY, O.SECONDARYCATEGORY AS SECONDARYCATEGORY, O.PRICE AS PRICE
 FROM (SELECT R.CLASSNUM, AVG(STARPOINT) AS AVGPOINT
         FROM REVIEW R, ONEDAYCLASS O
-        WHERE R.CLASSNUM = O.CLASSNUM AND O.PRIMARYCATEGORY LIKE '%'||#{primaryCategory}||'%'
+        WHERE R.CLASSNUM = O.CLASSNUM AND O.PRIMARYCATEGORY LIKE '%'||#{primaryCategory}||'%' 
         GROUP BY R.CLASSNUM) R, ONEDAYCLASS O
 
 <if test="choice == null or choice == '' and search == null or search == ''">
 WHERE R.CLASSNUM = O.CLASSNUM
-ORDER BY O.LIKECOUNT DESC
+ORDER BY O.LIKECOUNT DESC 
 </if>
 <if test="choice != null and choice != '' and search != null and search != ''">
 
@@ -33,10 +34,44 @@ ORDER BY O.LIKECOUNT DESC
 <if test="choice == 'orderByRecent'">WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' ORDER BY O.CLASSNUM DESC</if>
 
 <if test="choice == 'orderByAvg'">WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' ORDER BY AVGPOINT DESC </if>
+
 </if>
 
+</select>
+
+<!-- 클래스 리스트 갯수 -->
+
+<select id="classListCount" parameterType="bit.com.a.dto.oneDayClassParam" resultType="int">
+SELECT NVL(COUNT(*), 0) FROM (SELECT R.CLASSNUM, AVG(STARPOINT) AS AVGPOINT
+        FROM REVIEW R, ONEDAYCLASS O
+        WHERE R.CLASSNUM = O.CLASSNUM AND O.PRIMARYCATEGORY = #{primaryCategory}
+        GROUP BY R.CLASSNUM) R, ONEDAYCLASS O
+<if test="choice == null or choice == '' and search == null or search == ''">
+WHERE R.CLASSNUM = O.CLASSNUM
+</if>
+<if test="choice != null and choice != '' and search != null and search != ''">
+
+<if test="choice == 'orderByLike'">
+WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%'
+ORDER BY O.LIKECOUNT DESC
+</if>
+
+<if test="choice == 'orderByRecent'">
+WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%'
+ORDER BY O.CLASSNUM DESC
+</if>
+
+<if test="choice == 'orderByAvg'">
+WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' 
+ORDER BY AVGPOINT DESC
+</if>
+
+</if>
 
 </select>
+
+
+
 
 
 <!-- 나의 도장판 현황 -->
@@ -54,6 +89,47 @@ ORDER BY O.LIKECOUNT DESC
 	FROM MYSTAMP
 	WHERE MEMNUM = #{memNum}
 </select>
+
+
+
+
+
+<!-- home : 클래스 최신순 리스트 출력 -->
+<select id="getNewestClassList" resultType="bit.com.a.dto.onedayClassDto">
+	SELECT CLASSNUM, INSTRUCTOR, TITLE, IMAGE1, ENDDATE
+	FROM (SELECT ROW_NUMBER()OVER(ORDER BY CLASSNUM DESC) AS RNUM, 
+				 CLASSNUM, INSTRUCTOR, TITLE, IMAGE1, ENDDATE
+		  FROM ONEDAYCLASS 
+		  WHERE DEL=0)  
+	WHERE RNUM BETWEEN 1 AND 9
+</select>
+
+
+<!-- home : 클래스 인기순 출력 -->
+<select id="getBestClassList" resultType="bit.com.a.dto.onedayClassDto">
+	SELECT CLASSNUM, INSTRUCTOR, TITLE, IMAGE1, ENDDATE
+	FROM (SELECT ROW_NUMBER()OVER(ORDER BY LIKECOUNT DESC) AS RNUM, 
+				 CLASSNUM, INSTRUCTOR, TITLE, IMAGE1, ENDDATE
+		  FROM ONEDAYCLASS 
+		  WHERE DEL=0)  
+	WHERE RNUM BETWEEN 1 AND 9
+</select>
+
+
+
+<!-- 클래스 만들기 -->
+<insert id="onedayClassWrite" parameterType="bit.com.a.dto.onedayClassDto">
+		INSERT INTO ONEDAYCLASS (CLASSNUM, MASTERNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYYCATEGORY, TITLE, 
+		                         STARTDATE, ENDDATE, PRICE, DURATION, LIMITNUM, PREPARATION, ABOUTME,
+		                         IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINK, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM,
+		                         LAYERSELECT)
+		VALUES(SEQ_CLASS.NEXTVAL, #{masterNum}, #{instructor}, #{primaryCategory}, #{secondaryCategory}, #{title}, 
+		       #{startDate}, #{endDate}, #{price}, #{}, #{information}, #{duration}, #{limitNum}, #{preparation}, #{aboutMe},
+		       #{image1}, #{image2}, #{image3}, #{image4}, #{image5}, #{location}, #{youtubeLink}, 0, 0, 0, 0, #{layerSelect})
+</insert>
+
+
+
 
 
 </mapper>
