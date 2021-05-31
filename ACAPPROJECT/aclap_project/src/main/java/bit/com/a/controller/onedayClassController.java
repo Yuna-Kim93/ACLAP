@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import bit.com.a.dto.classSchedulCount;
 import bit.com.a.dto.oneDayClassParam;
 import bit.com.a.dto.onedayClassDto;
 import bit.com.a.mail.MailSend;
@@ -19,7 +20,7 @@ public class onedayClassController {
 	@Autowired
 	onedayClassService onedayClassService;
 	
-	// mypage.html에서 classDtail 정보를 얻기위함
+	// classDtail 정보를 얻기위함
 	@RequestMapping(value = "/classDtail", method = RequestMethod.POST)
 	public onedayClassDto classDtail(onedayClassDto dto) {
 		System.out.println("classDtail dto =" + dto.toString());
@@ -29,7 +30,7 @@ public class onedayClassController {
 		
 		return oClass;
 	}
-
+	
 	// TODO 문의메일 발송 
 	@RequestMapping(value = "/contactMail", method = RequestMethod.POST)
 	public boolean contactMail(String name, String mail, String content) {
@@ -45,9 +46,6 @@ public class onedayClassController {
 			System.out.println("Mail send Fail!");
 		return b;
 	}
-	
-	
-	
 	
 	// 클래스 카테고리별 뷰 에서 클래스 리스트 가져오기
 	@RequestMapping(value="/classListData", method = {RequestMethod.GET, RequestMethod.POST})
