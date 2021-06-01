@@ -3,8 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-   <mapper namespace="bit.com.a.dao.reviewDao">
-   
+
+  <mapper namespace="bit.com.a.dao.reviewDao">
+  
+  
+  	<!-- 원데이클래스 생성할 때 사용 (memNum == 1)-->
+	<insert id="onedayClassWriteReview" parameterType="java.lang.Integer">
+		INSERT INTO REVIEW (REVIEWSEQ, CLASSNUM, MEMNUM, STARPOINT, RCONTENT, NAME,
+							CLEANNESS, SATISFY, RCOMM, RLOCATION, ACCURACY, DEL, WDATE)
+		VALUES(SEQ_REVIEW.NEXTVAL, #{classNum}, 1, 0, '0','0', 0, 0, 0, 0, 0, 0, SYSDATE)
+	</insert>
+  
    	<!-- 리뷰작성 -->
    <insert id="writeReview" parameterType="bit.com.a.dto.reviewDto">
    		INSERT INTO REVIEW (REVIEWSEQ, CLASSNUM, MEMNUM, STARPOINT, RCONTENT, NAME, CLEANNESS, SATISFY, RCOMM, RLOCATION, ACCURACY, DEL, IMAGE1, IMAGE2, IMAGE3, WDATE)
@@ -12,3 +21,4 @@
    </insert>
    
    </mapper>
+

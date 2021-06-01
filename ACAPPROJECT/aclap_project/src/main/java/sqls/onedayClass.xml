@@ -121,18 +121,20 @@ ORDER BY AVGPOINT DESC
 
 <!-- 클래스 만들기 -->
 <insert id="onedayClassWrite" parameterType="bit.com.a.dto.onedayClassDto">
-		INSERT INTO ONEDAYCLASS (CLASSNUM, MASTERNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYYCATEGORY, TITLE, 
-		                         STARTDATE, ENDDATE, PRICE, DURATION, LIMITNUM, PREPARATION, ABOUTME,
-		                         IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINK, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM,
-		                         LAYERSELECT)
+		INSERT INTO ONEDAYCLASS (CLASSNUM, MASTERNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, 
+		                         STARTDATE, ENDDATE, PRICE, DURATION, LIMITNUM, PREPARATION, ABOUTME, CONTENT, INFORMATION,
+		                         IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINK, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM, LAYERSELECT)
 		VALUES(SEQ_CLASS.NEXTVAL, #{masterNum}, #{instructor}, #{primaryCategory}, #{secondaryCategory}, #{title}, 
-
-		       #{startDate}, #{endDate}, #{price}, #{duration}, #{information}, #{duration}, #{limitNum}, #{preparation}, #{aboutMe},
+		       #{startDate}, #{endDate}, #{price}, #{duration}, #{limitNum}, #{preparation}, #{aboutMe}, #{content}, #{information},
 		       #{image1}, #{image2}, #{image3}, #{image4}, #{image5}, #{location}, #{youtubeLink}, 0, 0, 0, 0, #{layerSelect})
 </insert>
 
-
-
+<!-- 클래스 생성 후 classNum 가져오기 -->
+<select id="onedayClassWriteAfClassNum" resultType="java.lang.Integer">
+	SELECT CLASSNUM
+	FROM ONEDAYCLASS
+	WHERE MASTERNUM=#{masterNum} AND INSTRUCTOR=#{instructor} AND TITLE=#{title} AND LOCATION=#{location}
+</select>
 
 
 

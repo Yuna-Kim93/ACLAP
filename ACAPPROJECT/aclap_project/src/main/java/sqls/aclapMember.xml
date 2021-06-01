@@ -85,8 +85,13 @@
 	</delete>
 	
 
-	
-	
+
+	<!-- classMaster Update -->
+	<update id="classMasterUpdate" parameterType="java.lang.Integer">		
+		UPDATE ACLAPMEMBER
+		SET CLASSMASTER=1
+		WHERE MEMNUM=#{memNum}
+	</update>
 
 	
 	<!-- myPoint Update -->

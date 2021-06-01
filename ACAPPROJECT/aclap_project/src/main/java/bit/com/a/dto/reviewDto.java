@@ -2,45 +2,58 @@ package bit.com.a.dto;
 
 public class reviewDto {
 
+	private int reviewSeq;
 	private int classNum;
 	private int memNum;
+	private double starPoint;
 	private String rContent;
 	private String name;
-	private double starPoint;
-	private double cleanness; //청결도
-	private double rComm;
-	private double satisfy;  //만족도
-	private double rLocation;
+	private double cleaness;
+	private double satisfy;
+	private double rcomm;
+	private double rlocation;
 	private double accuracy;
-	private int del;
+	private int del;         // default = 0 
+	private String wDate;
 	private String image1;
 	private String image2;
 	private String image3;
-	private String wdate;
 	
 	public reviewDto() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public reviewDto(int classNum, int memNum, String rContent, String name, double starPoint, double cleanness,
-			double rComm, double satisfy, double rLocation, double accuracy, int del, String image1, String image2,
-			String image3) {
+	public reviewDto(int reviewSeq, int classNum, int memNum, double starPoint, String rContent, String name,
+			double cleaness, double satisfy, double rcomm, double rlocation, double accuracy, int del, String wDate,
+			String image1, String image2, String image3) {
 		super();
+		this.reviewSeq = reviewSeq;
 		this.classNum = classNum;
 		this.memNum = memNum;
+		this.starPoint = starPoint;
 		this.rContent = rContent;
 		this.name = name;
-		this.starPoint = starPoint;
-		this.cleanness = cleanness;
-		this.rComm = rComm;
+		this.cleaness = cleaness;
 		this.satisfy = satisfy;
-		this.rLocation = rLocation;
+		this.rcomm = rcomm;
+		this.rlocation = rlocation;
 		this.accuracy = accuracy;
 		this.del = del;
+		this.wDate = wDate;
+
 		this.image1 = image1;
 		this.image2 = image2;
 		this.image3 = image3;
 	}
+
+
+	public int getReviewSeq() {
+		return reviewSeq;
+	}
+
+	public void setReviewSeq(int reviewSeq) {
+		this.reviewSeq = reviewSeq;
+	}
+
 
 	public int getClassNum() {
 		return classNum;
@@ -58,6 +71,16 @@ public class reviewDto {
 		this.memNum = memNum;
 	}
 
+
+	public double getStarPoint() {
+		return starPoint;
+	}
+
+	public void setStarPoint(double starPoint) {
+		this.starPoint = starPoint;
+	}
+
+
 	public String getrContent() {
 		return rContent;
 	}
@@ -74,28 +97,12 @@ public class reviewDto {
 		this.name = name;
 	}
 
-	public double getStarPoint() {
-		return starPoint;
+	public double getCleaness() {
+		return cleaness;
 	}
 
-	public void setStarPoint(double starPoint) {
-		this.starPoint = starPoint;
-	}
-
-	public double getCleanness() {
-		return cleanness;
-	}
-
-	public void setCleanness(double cleanness) {
-		this.cleanness = cleanness;
-	}
-
-	public double getrComm() {
-		return rComm;
-	}
-
-	public void setrComm(double rComm) {
-		this.rComm = rComm;
+	public void setCleaness(double cleaness) {
+		this.cleaness = cleaness;
 	}
 
 	public double getSatisfy() {
@@ -106,12 +113,20 @@ public class reviewDto {
 		this.satisfy = satisfy;
 	}
 
-	public double getrLocation() {
-		return rLocation;
+	public double getRcomm() {
+		return rcomm;
 	}
 
-	public void setrLocation(double rLocation) {
-		this.rLocation = rLocation;
+	public void setRcomm(double rcomm) {
+		this.rcomm = rcomm;
+	}
+
+	public double getRlocation() {
+		return rlocation;
+	}
+
+	public void setRlocation(double rlocation) {
+		this.rlocation = rlocation;
 	}
 
 	public double getAccuracy() {
@@ -128,6 +143,14 @@ public class reviewDto {
 
 	public void setDel(int del) {
 		this.del = del;
+	}
+
+	public String getwDate() {
+		return wDate;
+	}
+
+	public void setwDate(String wDate) {
+		this.wDate = wDate;
 	}
 
 	public String getImage1() {
@@ -156,11 +179,10 @@ public class reviewDto {
 
 	@Override
 	public String toString() {
-		return "reviewDto [classNum=" + classNum + ", memNum=" + memNum + ", rContent=" + rContent + ", name=" + name
-				+ ", starPoint=" + starPoint + ", cleanness=" + cleanness + ", rComm=" + rComm + ", satisfy=" + satisfy
-				+ ", rLocation=" + rLocation + ", accuracy=" + accuracy + ", del=" + del + ", image1=" + image1
-				+ ", image2=" + image2 + ", image3=" + image3 + "]";
+		return "reviewDto [reviewSeq=" + reviewSeq + ", classNum=" + classNum + ", memNum=" + memNum + ", starPoint="
+				+ starPoint + ", rContent=" + rContent + ", name=" + name + ", cleaness=" + cleaness + ", satisfy="
+				+ satisfy + ", rcomm=" + rcomm + ", rlocation=" + rlocation + ", accuracy=" + accuracy + ", del=" + del
+				+ ", wDate=" + wDate + ", image1=" + image1 + ", image2=" + image2 + ", image3=" + image3 + "]";
 	}
-
-	
 }
+
