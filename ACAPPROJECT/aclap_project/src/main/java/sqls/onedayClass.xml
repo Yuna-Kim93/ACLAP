@@ -124,6 +124,7 @@ ORDER BY AVGPOINT DESC
 		                         IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINK, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM,
 		                         LAYERSELECT)
 		VALUES(SEQ_CLASS.NEXTVAL, #{masterNum}, #{instructor}, #{primaryCategory}, #{secondaryCategory}, #{title}, 
+
 		       #{startDate}, #{endDate}, #{price}, #{duration}, #{information}, #{duration}, #{limitNum}, #{preparation}, #{aboutMe},
 		       #{image1}, #{image2}, #{image3}, #{image4}, #{image5}, #{location}, #{youtubeLink}, 0, 0, 0, 0, #{layerSelect})
 </insert>
