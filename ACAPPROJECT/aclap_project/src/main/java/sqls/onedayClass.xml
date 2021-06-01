@@ -7,7 +7,7 @@
 
 <select id="getOnedayClass" parameterType="bit.com.a.dto.onedayClassDto" resultType="bit.com.a.dto.onedayClassDto">
 	SELECT CLASSNUM, MASTERNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, CONTENT, STARTDATE, ENDDATE, PRICE, INFORMATION, DURATION, LIMITNUM, PREPARATION,
-		ABOUTME, IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINKE, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM, A.PROFILEPIC
+		ABOUTME, IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINK, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM, A.PROFILEPIC
 	FROM ONEDAYCLASS O, ACLAPMEMBER A
 	WHERE O.MASTERNUM = A.MEMNUM 
 		AND CLASSNUM = #{classNum}
@@ -124,7 +124,7 @@ ORDER BY AVGPOINT DESC
 		                         IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINK, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM,
 		                         LAYERSELECT)
 		VALUES(SEQ_CLASS.NEXTVAL, #{masterNum}, #{instructor}, #{primaryCategory}, #{secondaryCategory}, #{title}, 
-		       #{startDate}, #{endDate}, #{price}, #{}, #{information}, #{duration}, #{limitNum}, #{preparation}, #{aboutMe},
+		       #{startDate}, #{endDate}, #{price}, #{duration}, #{information}, #{duration}, #{limitNum}, #{preparation}, #{aboutMe},
 		       #{image1}, #{image2}, #{image3}, #{image4}, #{image5}, #{location}, #{youtubeLink}, 0, 0, 0, 0, #{layerSelect})
 </insert>
 
