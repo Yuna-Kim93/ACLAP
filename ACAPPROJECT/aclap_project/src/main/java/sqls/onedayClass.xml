@@ -9,7 +9,8 @@
 	SELECT CLASSNUM, MASTERNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, CONTENT, STARTDATE, ENDDATE, PRICE, INFORMATION, DURATION, LIMITNUM, PREPARATION,
 		ABOUTME, IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINKE, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM, A.PROFILEPIC
 	FROM ONEDAYCLASS O, ACLAPMEMBER A
-	WHERE CLASSNUM = #{classNum}
+	WHERE O.MASTERNUM = A.MEMNUM 
+		AND CLASSNUM = #{classNum}
 </select>
 
 <!-- 클래스 리스트 정렬 -->
@@ -114,6 +115,18 @@ ORDER BY AVGPOINT DESC
 	WHERE RNUM BETWEEN 1 AND 9
 </select>
 
+
+
+<!-- 클래스 만들기 -->
+<insert id="onedayClassWrite" parameterType="bit.com.a.dto.onedayClassDto">
+		INSERT INTO ONEDAYCLASS (CLASSNUM, MASTERNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYYCATEGORY, TITLE, 
+		                         STARTDATE, ENDDATE, PRICE, DURATION, LIMITNUM, PREPARATION, ABOUTME,
+		                         IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, YOUTUBELINK, LIKECOUNT, DEL, OLDREGNUM, NEWREGNUM,
+		                         LAYERSELECT)
+		VALUES(SEQ_CLASS.NEXTVAL, #{masterNum}, #{instructor}, #{primaryCategory}, #{secondaryCategory}, #{title}, 
+		       #{startDate}, #{endDate}, #{price}, #{duration}, #{information}, #{duration}, #{limitNum}, #{preparation}, #{aboutMe},
+		       #{image1}, #{image2}, #{image3}, #{image4}, #{image5}, #{location}, #{youtubeLink}, 0, 0, 0, 0, #{layerSelect})
+</insert>
 
 
 

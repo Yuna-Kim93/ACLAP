@@ -15,6 +15,6 @@ public class reviewService {
 	reviewDao reviewDao;
 	
 	public boolean writeReview(reviewDto dto) {
-		return reviewDao.wirteReview(dto);
+		return reviewDao.writeReview(dto);
 	}
 }

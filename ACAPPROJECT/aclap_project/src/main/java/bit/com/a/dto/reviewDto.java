@@ -16,6 +16,7 @@ public class reviewDto {
 	private String image1;
 	private String image2;
 	private String image3;
+	private String wdate;
 	
 	public reviewDto() {
 		// TODO Auto-generated constructor stub

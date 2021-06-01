@@ -10,6 +10,6 @@ import bit.com.a.dto.reviewDto;
 public interface reviewDao {
 	
 	// 리뷰쓰기 
-	boolean wirteReview (reviewDto dto);
+	boolean writeReview (reviewDto dto);
 
 }

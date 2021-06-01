@@ -1,6 +1,7 @@
 package bit.com.a.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,27 +59,46 @@ public class reviewController {
 		@RequestMapping(value = "/writeReview", method = RequestMethod.POST)
 		public String writeReview(reviewDto dto, MultipartHttpServletRequest req,
 								@RequestParam("uploadFile") List<MultipartFile> files) throws Exception {
+			
 			System.out.println("oneDayClassController writeReview() " + new Date());
 			System.out.println(dto.toString());
-			
-			if(req.getFiles("file").get(0).getSize() != 0) {
-				files = req.getFiles("file");
-			}
 		
-			 // 파일 업로드(여러개) 처리 부분
+			List<String> filenames = new ArrayList<>();
+			
+			 // 파일 업로드 처리 부분
 		    for(MultipartFile file : files) {
-		        String originalName = file.getOriginalFilename();
-		      //  String filePath = basePath + "/" + originalName;
-		        String filePath = originalName;
-
-		        
-		        
-		        File dest = new File(filePath);
-		        file.transferTo(dest);
-		        
-		        System.out.println(dest);
-		        //dto 이미지경로 세팅
+		        String originalName = file.getOriginalFilename();  
+		        String myPath = "http://localhost:3000//upload//"; // 출력용 
+		        filenames.add(myPath + originalName);		        
+		        System.out.println(originalName);	    
+		      		        
 		    }		
+		  //dto 이미지경로 세팅
+		    if (filenames.size() == 0) {
+		    	dto.setImage1("");
+		    	dto.setImage2("");
+		    	dto.setImage3("");
+		    }
+		    else if (filenames.size() == 1) {
+		    	dto.setImage1(filenames.get(0));
+		    	dto.setImage2("");
+		    	dto.setImage3("");
+		    }
+		    else if (filenames.size() == 2) {
+		    	dto.setImage1(filenames.get(0));
+		    	dto.setImage2(filenames.get(1));
+		    	dto.setImage3("");
+		    }
+		    else if (filenames.size() == 3) {
+		    	dto.setImage1(filenames.get(0));
+		    	dto.setImage2(filenames.get(1));
+		    	dto.setImage3(filenames.get(2));
+		    }else if (filenames.size() >= 4) {
+		    	return "error";
+		    }
+		    rService.writeReview(dto);
+		    System.out.println(dto);
+		    
 			return "uploaded";
 		}
 	
