@@ -66,10 +66,7 @@ public class onedayClassService {
 	public List<onedayClassDto> classListData(oneDayClassParam param) {
 		return onedayClassDao.classListData(param);
 	}
-	//클래스 리스트 갯수
-	public int classListCount(oneDayClassParam param) {
-		return onedayClassDao.classListCount(param);
-	}
+	
 
 	//----------------------------home----------------------------------
 	// home : 클래스 최신순 리스트 출력
