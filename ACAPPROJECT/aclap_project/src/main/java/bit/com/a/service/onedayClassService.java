@@ -82,16 +82,12 @@ public class onedayClassService {
 		return onedayClassDao.getBestClassList();
 	};
 
-	public boolean onedayClassWrite() {
-		// DB 저장
-		int n = onedayClassDao.onedayClassWrite();
-		
-		// class master Update 
-		//int n = aclapMemberDao.classMasterUpdate();
-		
+	// 원데이클래스 생성
+	public int onedayClassWrite(onedayClassDto dto) {
+		int n = onedayClassDao.onedayClassWrite(dto);
 		if(n>0)
-			System.out.println("onedayClassWrite Success");
-		return true;
+			System.out.println("=== onedayClassWrite Success ===");
+		List<Integer> classSeq = onedayClassDao.onedayClassWriteAfClassNum(dto);
+		return classSeq.get(0);
 	};		
-
 }
