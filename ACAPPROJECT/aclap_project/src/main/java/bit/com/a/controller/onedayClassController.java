@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import bit.com.a.dto.classSchedulCount;
+
 import bit.com.a.FileUploadUtiles;
 import bit.com.a.dto.aclapMemberDto;
 import bit.com.a.dto.oneDayClassParam;
@@ -71,17 +71,7 @@ public class onedayClassController {
 		
 	}
 	
-	//클래스 카테고리별 뷰에서 클래스 글 총수 가져오기
-	@RequestMapping(value="/classListCount", method = {RequestMethod.GET, RequestMethod.POST})
-	public int classListCount(oneDayClassParam param) {
-		System.out.println("oneDayClassController classListCount()" + new Date());
-		
-		int count = onedayClassService.classListCount(param);
-		
-		System.out.println("갯수 확인: " + count);
-		return count;
-		
-	}
+	
 	
 	// Home_클래스 최신순 출력 
 	@RequestMapping(value="/getNewestClassList", method = {RequestMethod.GET, RequestMethod.POST})
@@ -105,7 +95,7 @@ public class onedayClassController {
 		return list;
 	}
 	
-	
+
 	// 클래스 만들기 
 	@RequestMapping(value = "/onedayClassWrite", method = RequestMethod.POST)
 	public boolean addMember(onedayClassDto dto, HttpServletRequest req, String noClassDayOfWeek,
@@ -176,7 +166,6 @@ public class onedayClassController {
 		 */
 		return true;
 	}
-	
 
 	
 }

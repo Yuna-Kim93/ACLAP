@@ -88,13 +88,6 @@
 	
 	
 
-	<!-- classMaster Update -->
-	<update id="classMasterUpdate" parameterType="bit.com.a.dto.aclapMemberDto">		
-		UPDATE ACLAPMEMBER
-		SET CLASSMASTER=1
-		WHERE MEMNUM=#{memNum}
-	</update>
-	
 	
 	<!-- myPoint Update -->
 	<update id="myPointUpdate" parameterType="bit.com.a.dto.aclapMemberDto">		
