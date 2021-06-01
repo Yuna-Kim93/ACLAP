@@ -1,6 +1,7 @@
 package bit.com.a.dto;
 
 public class reviewDto {
+
 	private int reviewSeq;
 	private int classNum;
 	private int memNum;
@@ -38,10 +39,12 @@ public class reviewDto {
 		this.accuracy = accuracy;
 		this.del = del;
 		this.wDate = wDate;
+
 		this.image1 = image1;
 		this.image2 = image2;
 		this.image3 = image3;
 	}
+
 
 	public int getReviewSeq() {
 		return reviewSeq;
@@ -50,6 +53,7 @@ public class reviewDto {
 	public void setReviewSeq(int reviewSeq) {
 		this.reviewSeq = reviewSeq;
 	}
+
 
 	public int getClassNum() {
 		return classNum;
@@ -67,6 +71,7 @@ public class reviewDto {
 		this.memNum = memNum;
 	}
 
+
 	public double getStarPoint() {
 		return starPoint;
 	}
@@ -74,6 +79,7 @@ public class reviewDto {
 	public void setStarPoint(double starPoint) {
 		this.starPoint = starPoint;
 	}
+
 
 	public String getrContent() {
 		return rContent;
@@ -179,4 +185,4 @@ public class reviewDto {
 				+ ", wDate=" + wDate + ", image1=" + image1 + ", image2=" + image2 + ", image3=" + image3 + "]";
 	}
 }
-	
+

@@ -36,9 +36,7 @@ public interface onedayClassDao {
 		//클래스 리스트 가져오기
 		public List<onedayClassDto> classListData(oneDayClassParam param);
 		
-		//클래스 리스트 갯수 가져오기
-		public int classListCount(oneDayClassParam param);
-
+		
 		
 		
 		
