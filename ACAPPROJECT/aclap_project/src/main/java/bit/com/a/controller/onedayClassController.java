@@ -105,7 +105,7 @@ public class onedayClassController {
 		return list;
 	}
 	
-	
+
 	// 클래스 만들기 
 	@RequestMapping(value = "/onedayClassWrite", method = RequestMethod.POST)
 	public boolean addMember(onedayClassDto dto, HttpServletRequest req, String noClassDayOfWeek,
@@ -176,7 +176,6 @@ public class onedayClassController {
 		 */
 		return true;
 	}
-	
 
 	
 }
