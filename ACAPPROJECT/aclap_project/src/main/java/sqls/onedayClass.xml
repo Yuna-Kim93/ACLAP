@@ -136,6 +136,9 @@ ORDER BY AVGPOINT DESC
 	WHERE MASTERNUM=#{masterNum} AND INSTRUCTOR=#{instructor} AND TITLE=#{title} AND LOCATION=#{location}
 </select>
 
-
+<update id="updateNewRegNum" parameterType="bit.com.a.dto.participateDto">
+	UPDATE ONEDAYCLASS SET NEWREGNUM = NEWREGNUM + #{joinNum}
+	WHERE CLASSNUM = #{classNum}
+</update>
 
 </mapper>

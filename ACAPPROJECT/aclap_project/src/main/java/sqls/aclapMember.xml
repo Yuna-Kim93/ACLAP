@@ -127,6 +127,9 @@
 		WHERE EMAIL=#{email}
 	</update>
 
-
+	<update id="updateMyPoint" parameterType="bit.com.a.dto.participateDto">
+		UPDATE ACLAPMEMBER SET MYPOINT = MYPOINT - #{rPoint} 
+		WHERE MEMNUM = #{memNum}
+	</update>
 
 </mapper>
