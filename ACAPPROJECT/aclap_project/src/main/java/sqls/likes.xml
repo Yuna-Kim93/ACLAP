@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="bit.com.a.dao.likesDao">
+  
+    <!-- like 유무 체크 -->
+	<select id="checkLike" parameterType="bit.com.a.dto.likesDto" resultType="java.lang.Integer">
+		SELECT COUNT(MEMNUM)
+		FROM LIKES
+		WHERE MEMNUM=#{memNum} AND CLASSNUM=#{classNum}
+	</select>
+  
+    <!-- like 등록 -->
+	<insert id="addLike" parameterType="bit.com.a.dto.likesDto">
+		INSERT INTO LIKES (MEMNUM, CLASSNUM)
+		VALUES(#{memNum}, #{classNum})
+	</insert>
+	
+	<!-- like 삭제 -->
+	<delete id="delLike" parameterType="bit.com.a.dto.likesDto">
+		DELETE FROM LIKES
+		WHERE MEMNUM=#{memNum} AND CLASSNUM=#{classNum}
+	</delete>
+  
+  
+  </mapper>

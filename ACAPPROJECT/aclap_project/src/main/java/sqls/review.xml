@@ -13,9 +13,10 @@
 		VALUES(SEQ_REVIEW.NEXTVAL, #{classNum}, 1, 0, '0','0', 0, 0, 0, 0, 0, 0, SYSDATE)
 	</insert>
   
-  
-
-  
-  
-  
+   	<!-- 리뷰작성 -->
+    <insert id="writeReview" parameterType="bit.com.a.dto.reviewDto">
+   		INSERT INTO REVIEW (REVIEWSEQ, CLASSNUM, MEMNUM, STARPOINT, RCONTENT, NAME, CLEANNESS, SATISFY, RCOMM, RLOCATION, ACCURACY, DEL, IMAGE1, IMAGE2, IMAGE3, WDATE)
+		VALUES (SEQ_REVIEW.NEXTVAL, #{classNum}, #{memNum}, 0, #{rContent}, #{name}, #{cleanness}, #{satisfy}, #{rComm}, #{rLocation}, #{accuracy}, 0, #{image1}, #{image2}, #{image3}, SYSDATE)   
+    </insert>
+   
   </mapper>

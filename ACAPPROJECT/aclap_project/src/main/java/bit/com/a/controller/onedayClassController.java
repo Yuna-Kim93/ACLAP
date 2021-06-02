@@ -77,16 +77,7 @@ public class onedayClassController {
 		return cList;
 	}
 
-	// 클래스 카테고리별 뷰에서 클래스 글 총수 가져오기
-	@RequestMapping(value = "/classListCount", method = { RequestMethod.GET, RequestMethod.POST })
-	public int classListCount(oneDayClassParam param) {
-		System.out.println("oneDayClassController classListCount()" + new Date());
-
-		int count = onedayClassService.classListCount(param);
-
-		System.out.println("갯수 확인: " + count);
-		return count;
-	}
+	
 
 	// Home_클래스 최신순 출력
 	@RequestMapping(value = "/getNewestClassList", method = { RequestMethod.GET, RequestMethod.POST })
@@ -109,8 +100,20 @@ public class onedayClassController {
 			System.out.println("getBestClassList Success");
 		return list;
 	}
+	
+	// HOME_추천클래스 출력 
+	@RequestMapping(value = "/getRecommendClassList", method = { RequestMethod.GET, RequestMethod.POST })
+	public List<onedayClassDto> getRecommendClassList() {
+		System.out.println("////////// oneDayClassController getRecommendClassList() //////////");
 
-	// 클래스 만들기
+		List<onedayClassDto> list = onedayClassService.getBestClassList();
+		if (list.size() != 0)
+			System.out.println("getRecommendClassList Success");
+		return list;
+	}
+	
+	
+	// 클래스 만들기 
 	@RequestMapping(value = "/onedayClassWrite", method = RequestMethod.POST)
 	public boolean addMember(onedayClassDto dto, HttpServletRequest req, String noClassDayOfWeek, 
 			@RequestParam("imageA1") MultipartFile imageA1, @RequestParam("imageA2") MultipartFile imageA2,
