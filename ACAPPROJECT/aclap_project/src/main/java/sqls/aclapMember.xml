@@ -62,6 +62,7 @@
 		WHERE EMAIL=#{email} 
 	</update>
 
+
 	<!-- //////////////////////////////////////////////// -->
 
 	
@@ -84,12 +85,14 @@
 	</delete>
 	
 
+
 	<!-- classMaster Update -->
 	<update id="classMasterUpdate" parameterType="java.lang.Integer">		
 		UPDATE ACLAPMEMBER
 		SET CLASSMASTER=1
 		WHERE MEMNUM=#{memNum}
 	</update>
+
 	
 	
 
@@ -126,6 +129,9 @@
 		WHERE EMAIL=#{email}
 	</update>
 
-
+	<update id="updateMyPoint" parameterType="bit.com.a.dto.participateDto">
+		UPDATE ACLAPMEMBER SET MYPOINT = MYPOINT - #{rPoint} 
+		WHERE MEMNUM = #{memNum}
+	</update>
 
 </mapper>

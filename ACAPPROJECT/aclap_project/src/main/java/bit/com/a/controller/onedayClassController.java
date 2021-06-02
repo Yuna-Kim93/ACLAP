@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import bit.com.a.FileUploadUtiles;
 import bit.com.a.NoClassUtil;
 import bit.com.a.dto.noClassDateDto;
@@ -77,11 +78,29 @@ public class onedayClassController {
 		return cList;
 	}
 
-	
+
+
+
+	/*
+	 * // 클래스 카테고리별 뷰에서 클래스 글 총수 가져오기
+	 * 
+	 * @RequestMapping(value = "/classListCount", method = { RequestMethod.GET,
+	 * RequestMethod.POST }) public int classListCount(oneDayClassParam param) {
+	 * System.out.println("oneDayClassController classListCount()" + new Date());
+	 * 
+	 * // int count = onedayClassService.classListCount(param);
+	 * 
+	 * // System.out.println("갯수 확인: " + count); // return count; }
+	 */
+
 
 	// Home_클래스 최신순 출력
 	@RequestMapping(value = "/getNewestClassList", method = { RequestMethod.GET, RequestMethod.POST })
 	public List<onedayClassDto> getNewestClassList() {
+
+	
+	
+
 		System.out.println("////////// oneDayClassController getNewestClassList() //////////");
 
 		List<onedayClassDto> list = onedayClassService.getNewestClassList();
@@ -106,6 +125,7 @@ public class onedayClassController {
 	public List<onedayClassDto> getRecommendClassList() {
 		System.out.println("////////// oneDayClassController getRecommendClassList() //////////");
 
+
 		List<onedayClassDto> list = onedayClassService.getBestClassList();
 		if (list.size() != 0)
 			System.out.println("getRecommendClassList Success");
@@ -114,6 +134,7 @@ public class onedayClassController {
 	
 	
 	// 클래스 만들기 
+
 	@RequestMapping(value = "/onedayClassWrite", method = RequestMethod.POST)
 	public boolean addMember(onedayClassDto dto, HttpServletRequest req, String noClassDayOfWeek, 
 			@RequestParam("imageA1") MultipartFile imageA1, @RequestParam("imageA2") MultipartFile imageA2,

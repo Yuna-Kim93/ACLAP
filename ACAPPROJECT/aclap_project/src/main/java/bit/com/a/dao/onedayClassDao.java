@@ -13,6 +13,7 @@ import bit.com.a.dto.myStampDto;
 
 import bit.com.a.dto.onedayClassDto;
 import bit.com.a.dto.onedayParam;
+import bit.com.a.dto.participateDto;
 
 @Mapper
 @Repository
@@ -36,9 +37,7 @@ public interface onedayClassDao {
 		//클래스 리스트 가져오기
 		public List<onedayClassDto> classListData(oneDayClassParam param);
 		
-		//클래스 리스트 갯수 가져오기
-		public int classListCount(oneDayClassParam param);
-
+		
 		
 		
 		
@@ -53,4 +52,9 @@ public interface onedayClassDao {
 		
 		// 생성한 클래스 seq 가져오기
 		public List<Integer> onedayClassWriteAfClassNum(onedayClassDto dto);
+		
+		
+		
+		// 참여자 수를 NewRegNum에 update
+		public int updateNewRegNum(participateDto dto);
 }

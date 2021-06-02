@@ -17,6 +17,7 @@ import bit.com.a.dto.myStampDto;
 
 import bit.com.a.dto.onedayClassDto;
 import bit.com.a.dto.onedayParam;
+import bit.com.a.dto.participateDto;
 
 @Service
 @Transactional
@@ -66,10 +67,7 @@ public class onedayClassService {
 	public List<onedayClassDto> classListData(oneDayClassParam param) {
 		return onedayClassDao.classListData(param);
 	}
-	//클래스 리스트 갯수
-	public int classListCount(oneDayClassParam param) {
-		return onedayClassDao.classListCount(param);
-	}
+	
 
 	//----------------------------home----------------------------------
 	// home : 클래스 최신순 리스트 출력
@@ -90,4 +88,9 @@ public class onedayClassService {
 		List<Integer> classSeq = onedayClassDao.onedayClassWriteAfClassNum(dto);
 		return classSeq.get(0);
 	};		
+	
+	// 참여자 수를 NewRegNum에 update
+	public int updateNewRegNum(participateDto dto) {
+		return onedayClassDao.updateNewRegNum(dto);
+	}
 }
