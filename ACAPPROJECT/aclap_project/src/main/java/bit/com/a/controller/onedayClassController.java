@@ -79,6 +79,7 @@ public class onedayClassController {
 	}
 
 
+
 	/*
 	 * // 클래스 카테고리별 뷰에서 클래스 글 총수 가져오기
 	 * 

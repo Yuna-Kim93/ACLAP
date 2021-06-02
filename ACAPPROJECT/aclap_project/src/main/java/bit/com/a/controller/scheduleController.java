@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import bit.com.a.dto.classSchedulCount;
 import bit.com.a.dto.classScheduleDto;
 import bit.com.a.dto.onedayClassDto;
+import bit.com.a.dto.participateDto;
 import bit.com.a.dto.scheduleDto;
-
+import bit.com.a.service.aclapMemberService;
 import bit.com.a.service.onedayClassService;
 import bit.com.a.service.scheduleService;
 
@@ -27,6 +28,9 @@ public class scheduleController {
 	
 	@Autowired
 	onedayClassService onedayClassService;
+	
+	@Autowired
+	aclapMemberService aclapMemberService;
 	
 	// mypage.html에서 나의 수업 스케줄을 얻기 위함
 	@RequestMapping(value = "/mySchedule", method = RequestMethod.POST)
@@ -70,6 +74,38 @@ public class scheduleController {
 		clsMap.put("clist", clist);
 		clsMap.put("noDateList", noDateList);
 		return clsMap;
+	}
+	
+	// 참여하였을 경우
+	@RequestMapping(value="/participate", method = {RequestMethod.GET, RequestMethod.POST}) 
+	public String participate(participateDto dto){ 
+		System.out.println("participate dto = " + dto.toString());
+		
+		onedayClassDto oDto = new onedayClassDto();
+		oDto.setClassNum(dto.getClassNum());
+		onedayClassDto gDto = onedayClassService.getOnedayClass(oDto);
+		System.out.println(gDto.toString());
+		
+		// 나의 포인트 차감
+		int count1 = aclapMemberService.updateMyPoint(dto);
+		System.out.println("count1 = " + count1);
+		// 원데이클래스 오리진 넘버
+		int count2 = onedayClassService.updateNewRegNum(dto);
+		System.out.println("count2 = " + count2);
+		
+		dto.setTitle(gDto.getTitle());
+		dto.setPrimaryCategory(gDto.getPrimaryCategory());
+		dto.setSecondaryCategory(gDto.getSecondaryCategory());
+		System.out.println(dto.toString());
+		// 스탬프, 포인트, 스케줄
+		int count3 = scheduleService.participate(dto);
+		System.out.println("count3 = " + count3);
+		
+		if(count1*count2*count3 == 0) {
+			return "error";
+		}
+		
+		return "성공이다아~";
 	}
 	 
 }
