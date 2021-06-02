@@ -61,7 +61,7 @@ public class onedayClassService {
 	}
 	
 
-	
+	//----------------------------categoryView-------------------------
 	//클래스 리스트 뽑아
 	public List<onedayClassDto> classListData(oneDayClassParam param) {
 		return onedayClassDao.classListData(param);
