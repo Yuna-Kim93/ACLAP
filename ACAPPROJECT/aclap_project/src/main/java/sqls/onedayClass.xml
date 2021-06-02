@@ -40,36 +40,6 @@ ORDER BY O.LIKECOUNT DESC
 
 </select>
 
-<!-- 클래스 리스트 갯수 -->
-
-<select id="classListCount" parameterType="bit.com.a.dto.oneDayClassParam" resultType="int">
-SELECT NVL(COUNT(*), 0) FROM (SELECT R.CLASSNUM, AVG(STARPOINT) AS AVGPOINT
-        FROM REVIEW R, ONEDAYCLASS O
-        WHERE R.CLASSNUM = O.CLASSNUM AND O.PRIMARYCATEGORY = #{primaryCategory}
-        GROUP BY R.CLASSNUM) R, ONEDAYCLASS O
-<if test="choice == null or choice == '' and search == null or search == ''">
-WHERE R.CLASSNUM = O.CLASSNUM
-</if>
-<if test="choice != null and choice != '' and search != null and search != ''">
-
-<if test="choice == 'orderByLike'">
-WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%'
-ORDER BY O.LIKECOUNT DESC
-</if>
-
-<if test="choice == 'orderByRecent'">
-WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%'
-ORDER BY O.CLASSNUM DESC
-</if>
-
-<if test="choice == 'orderByAvg'">
-WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' 
-ORDER BY AVGPOINT DESC
-</if>
-
-</if>
-
-</select>
 
 
 

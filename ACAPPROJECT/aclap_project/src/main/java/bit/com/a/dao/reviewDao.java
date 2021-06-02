@@ -1,5 +1,7 @@
 package bit.com.a.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +18,8 @@ public interface reviewDao {
 
 	// 리뷰쓰기 
 	boolean writeReview (reviewDto dto);
-
+	// 리뷰 리스트 가져오기
+	public List<reviewDto> getReviewList(reviewDto dto);
+	
 
 }
