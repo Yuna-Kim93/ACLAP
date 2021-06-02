@@ -17,6 +17,7 @@ import bit.com.a.dto.myStampDto;
 
 import bit.com.a.dto.onedayClassDto;
 import bit.com.a.dto.onedayParam;
+import bit.com.a.dto.participateDto;
 
 @Service
 @Transactional
@@ -87,4 +88,9 @@ public class onedayClassService {
 		List<Integer> classSeq = onedayClassDao.onedayClassWriteAfClassNum(dto);
 		return classSeq.get(0);
 	};		
+	
+	// 참여자 수를 NewRegNum에 update
+	public int updateNewRegNum(participateDto dto) {
+		return onedayClassDao.updateNewRegNum(dto);
+	}
 }

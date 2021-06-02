@@ -59,4 +59,14 @@ ORDER BY RDATE
 	ORDER BY RDATE
 </select>
 
+<insert id="addSchedule" parameterType="bit.com.a.dto.participateDto">
+	INSERT INTO SCHEDULE (SCHEDULENUM, RDATE, MEMNUM, CLASSNUM, DEL)
+	VALUES(SEQ_SCHEDULE.NEXTVAL, #{cDate}, #{memNum}, #{classNum}, 0)
+</insert>
+
+<insert id="addStamp" parameterType="bit.com.a.dto.participateDto">
+	INSERT INTO MYSTAMP (MYSTAMPNUM, MEMNUM, CLASSNUM, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE)
+	VALUES (SEQ_MYSTAMP.NEXTVAL, #{memNum}, #{classNum}, #{primaryCategory}, #{secondaryCategory}, #{title})
+</insert>
+
 </mapper>

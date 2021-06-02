@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import bit.com.a.dao.aclapMemberDao;
 import bit.com.a.dto.aclapMemberDto;
 import bit.com.a.dto.aclapParam;
+import bit.com.a.dto.participateDto;
 
 @Service
 @Transactional
@@ -71,4 +72,9 @@ public class aclapMemberService {
 	public void setInterest(aclapMemberDto dto) {
 		aclapMemberDao.setInterest(dto);
 	};
+	
+	// 포인트 차감
+	public int updateMyPoint (participateDto dto) {
+		return aclapMemberDao.updateMyPoint(dto);
+	}
 }

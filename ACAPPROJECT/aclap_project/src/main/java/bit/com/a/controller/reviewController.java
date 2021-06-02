@@ -2,11 +2,9 @@ package bit.com.a.controller;
 
 
 import org.springframework.web.bind.annotation.RestController;
-
-
-
-
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+
+import bit.com.a.FileUploadUtiles;
 import bit.com.a.dto.reviewDto;
 import bit.com.a.service.reviewService;
 
@@ -30,37 +30,7 @@ public class reviewController {
 	
 	@Autowired
 	reviewService rService;
-/*	
-	// 리뷰 쓰기
-	@RequestMapping(value = "/writeReview", method = RequestMethod.POST)
-	public String writeReview(reviewDto dto, MultipartHttpServletRequest req,
-							@RequestParam("uploadFile") List<MultipartFile> files) throws Exception {
-		System.out.println("oneDayClassController writeReview() " + new Date());
-		System.out.println(dto.toString());
-		
-		
-		
-	//	String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();  //C:\Users\82102\Desktop
-	//	System.out.println(rootPath);
-	//	String basePath = rootPath + "/";
-	
-		 // 파일 업로드(여러개) 처리 부분
-	    for(MultipartFile file : files) {
-	        String originalName = file.getOriginalFilename();
-	      //  String filePath = basePath + "/" + originalName;
-	        String filePath = originalName;
 
-	        
-	        
-	        File dest = new File(filePath);
-	        file.transferTo(dest);
-	        
-	        System.out.println(dest);
-	        //dto 이미지경로 세팅
-	    }		
-		return "uploaded";
-	}
-*/
 	// 리뷰 쓰기
 		@RequestMapping(value = "/writeReview", method = RequestMethod.POST)
 		public String writeReview(reviewDto dto, MultipartHttpServletRequest req,
@@ -69,16 +39,33 @@ public class reviewController {
 			System.out.println("oneDayClassController writeReview() " + new Date());
 			System.out.println(dto.toString());
 		
+
+			String uploadPath = req.getServletContext().getRealPath("/upload"); 					
+			
+
 			List<String> filenames = new ArrayList<>();
 			
 			 // 파일 업로드 처리 부분
 		    for(MultipartFile file : files) {
-		        String originalName = file.getOriginalFilename();  
+		    	//이미지 파일 이름
+		        String originalName = file.getOriginalFilename();
+		        String newFilename = FileUploadUtiles.getNewFilename(originalName);
+		        
+		        String filepath = uploadPath + File.separator + newFilename;
+		        System.out.println("Img Path : "+ filepath);
+				
 		        String myPath = "http://localhost:3000//upload//"; // 출력용 
-		        filenames.add(myPath + originalName);		        
-		        System.out.println(originalName);	    
-		      		        
-		    }		
+		        filenames.add(myPath + newFilename);		        
+		        System.out.println(originalName);		 
+		        
+		         for(int i=0; i < files.size(); i++) {
+		        
+		        BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+				os.write(files.get(i).getBytes());
+				os.close();
+		         }        
+		    }	     
+
 		  //dto 이미지경로 세팅
 		    if (filenames.size() == 0) {
 		    	dto.setImage1("");
@@ -101,11 +88,23 @@ public class reviewController {
 		    	dto.setImage3(filenames.get(2));
 		    }else if (filenames.size() >= 4) {
 		    	return "error";
-		    }
+		    }	    
+
 		    rService.writeReview(dto);
 		    System.out.println(dto);
 		    
 			return "uploaded";
 		}
-	
+
+		
+		// 리뷰 리스트
+		@RequestMapping(value = "/getReviewList", method = RequestMethod.GET)
+		public List<reviewDto> getReviewList(reviewDto dto){
+			System.out.println("reviewController reviewList() "+ new Date());
+			List<reviewDto> list = rService.getReviewList(dto);
+			System.out.println(list.toString());
+			
+			return list;
+		}
+
 }

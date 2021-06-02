@@ -94,6 +94,9 @@
 	</update>
 
 	
+	
+
+	
 	<!-- myPoint Update -->
 	<update id="myPointUpdate" parameterType="bit.com.a.dto.aclapMemberDto">		
 		UPDATE ACLAPMEMBER
@@ -112,7 +115,6 @@
 		WHERE MEMNUM=${memNum}
 	</update>
 	
-
 	<!-- mypage.html에서 나의 정보를 얻어오기위함 -->
 	<select id="myinfo" parameterType="bit.com.a.dto.aclapMemberDto" resultType="bit.com.a.dto.aclapMemberDto">
 		SELECT MEMNUM, EMAIL, PWD, USERNAME, NICKNAME, PHONENUM, INTEREST1, INTEREST2, INTEREST3, PROFILEPIC, AUTH, CLASSMASTER, MYPOINT
@@ -127,6 +129,9 @@
 		WHERE EMAIL=#{email}
 	</update>
 
-
+	<update id="updateMyPoint" parameterType="bit.com.a.dto.participateDto">
+		UPDATE ACLAPMEMBER SET MYPOINT = MYPOINT - #{rPoint} 
+		WHERE MEMNUM = #{memNum}
+	</update>
 
 </mapper>
