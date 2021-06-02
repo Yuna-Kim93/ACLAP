@@ -42,9 +42,6 @@ ORDER BY O.LIKECOUNT DESC
 
 
 
-
-
-
 <!-- 나의 도장판 현황 -->
 <select id="myStampList" parameterType="Map" resultType="bit.com.a.dto.myStampDto">
 	SELECT MYSTAMPNUM, MEMNUM, CLASSNUM, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE

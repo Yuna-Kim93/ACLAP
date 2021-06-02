@@ -4,6 +4,7 @@ package bit.com.a.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 
 import bit.com.a.FileUploadUtiles;
 import bit.com.a.dto.reviewDto;
@@ -40,8 +42,10 @@ public class reviewController {
 			System.out.println("oneDayClassController writeReview() " + new Date());
 			System.out.println(dto.toString());
 		
+
 			String uploadPath = req.getServletContext().getRealPath("/upload"); 					
 			
+
 			List<String> filenames = new ArrayList<>();
 			
 			 // 파일 업로드 처리 부분
@@ -64,7 +68,7 @@ public class reviewController {
 				os.close();
 		         }        
 		    }	     
-		    
+
 		  //dto 이미지경로 세팅
 		    if (filenames.size() == 0) {
 		    	dto.setImage1("");
@@ -88,12 +92,13 @@ public class reviewController {
 		    }else if (filenames.size() >= 4) {
 		    	return "error";
 		    }	    
-		    
+
 		    rService.writeReview(dto);
 		    System.out.println(dto);
 		    
 			return "uploaded";
 		}
+
 		
 		// 리뷰 리스트
 		@RequestMapping(value = "/getReviewList", method = RequestMethod.GET)
@@ -104,5 +109,5 @@ public class reviewController {
 			
 			return list;
 		}
-	
+
 }
