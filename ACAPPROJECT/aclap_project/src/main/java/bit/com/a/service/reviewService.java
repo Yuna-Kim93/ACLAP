@@ -30,7 +30,5 @@ public class reviewService {
 		return reviewDao.getReviewList(dto);
 	}
 	
-	public boolean writeReview(reviewDto dto) {
-		return reviewDao.writeReview(dto);
-	}
+	
 }

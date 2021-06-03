@@ -38,4 +38,7 @@ public interface aclapMemberDao {
 	public void chargePoints (Map<String, Object> chargePoints);
 	// 포인트 차감
 	public int updateMyPoint (participateDto dto);
+	
+	// 관심사 조사하기
+	public String getYourInterest(int seq);
 }

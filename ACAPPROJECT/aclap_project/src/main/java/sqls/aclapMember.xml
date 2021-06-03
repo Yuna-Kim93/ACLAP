@@ -134,4 +134,7 @@
 		WHERE MEMNUM = #{memNum}
 	</update>
 
+	<select id="getYourInterest" parameterType="int" resultType="String">
+		SELECT INTEREST1 FROM ACLAPMEMBER WHERE MEMNUM = #{ memNum }
+	</select>
 </mapper>

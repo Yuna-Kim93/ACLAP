@@ -77,4 +77,8 @@ public class aclapMemberService {
 	public int updateMyPoint (participateDto dto) {
 		return aclapMemberDao.updateMyPoint(dto);
 	}
+	// 네이버 블로그 크롤링을 위해 매번 관심사 조사해서 받아주기 위한것
+	public String getYourInterest(int seq) {
+		return aclapMemberDao.getYourInterest(seq);
+	}
 }
