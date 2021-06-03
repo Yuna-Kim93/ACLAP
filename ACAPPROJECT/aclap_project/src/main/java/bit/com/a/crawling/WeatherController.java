@@ -21,7 +21,7 @@ public class WeatherController {
 		@RequestMapping(value="/weather", method = {RequestMethod.GET, RequestMethod.POST})
 		public static List<WeatherDto> getWeatherData() throws IOException{
 		//Jsoup : 각종 사이트에서 데이트를 취합할 수 있는 라이브러리
-			System.out.println("도착했다");
+		//	System.out.println("도착했다");
 				Document doc = Jsoup.connect("https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=%EA%B5%AD%EB%82%B4+%EB%82%A0%EC%94%A8&oquery=%EB%82%A0%EC%94%A8&tqi=h5ntXsp0YihssEPPQeNssssss1C-503915").get();
 				
 				//도시이름
@@ -52,9 +52,9 @@ public class WeatherController {
 					String t = temp.text();
 					String w = winfo.text();
 					
-					System.out.println(c);
-					System.out.println(t);
-					System.out.println(w);
+				//	System.out.println(c);
+				//	System.out.println(t);
+				//	System.out.println(w);
 					
 					WeatherDto dto = new WeatherDto();
 					dto.setCities(c);

@@ -84,6 +84,12 @@ public class onedayClassService {
 	public List<onedayClassDto> getBestClassList() {
 		return onedayClassDao.getBestClassList();
 	};
+	
+	// home : 추천 클래스 출력
+	public List<onedayClassDto> getRecommendClassList(aclapMemberDto dto){
+		return onedayClassDao.getRecommendClassList(dto);
+	};
+
 
 	// 원데이클래스 생성
 	public int onedayClassWrite(onedayClassDto dto) {
