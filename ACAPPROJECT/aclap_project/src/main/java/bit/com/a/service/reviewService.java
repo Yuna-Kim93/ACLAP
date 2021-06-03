@@ -29,5 +29,6 @@ public class reviewService {
 	public List<reviewDto> getReviewList(reviewDto dto){
 		return reviewDao.getReviewList(dto);
 	}
-	
+
+  
 }

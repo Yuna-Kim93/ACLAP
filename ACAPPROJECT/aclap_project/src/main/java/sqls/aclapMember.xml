@@ -114,7 +114,11 @@
 		    
 		WHERE MEMNUM=${memNum}
 	</update>
-	
+    
+	<select id="getYourInterest" parameterType="int" resultType="String">
+		SELECT INTEREST1 FROM ACLAPMEMBER WHERE MEMNUM = #{ memNum }
+	</select>
+    
 	<!-- mypage.html에서 나의 정보를 얻어오기위함 -->
 	<select id="myinfo" parameterType="bit.com.a.dto.aclapMemberDto" resultType="bit.com.a.dto.aclapMemberDto">
 		SELECT MEMNUM, EMAIL, PWD, USERNAME, NICKNAME, PHONENUM, INTEREST1, INTEREST2, INTEREST3, PROFILEPIC, AUTH, CLASSMASTER, MYPOINT
@@ -133,9 +137,10 @@
 		UPDATE ACLAPMEMBER SET MYPOINT = MYPOINT - #{rPoint} 
 		WHERE MEMNUM = #{memNum}
 	</update>
-	
+    
 	<update id="plusMyPoint" parameterType="bit.com.a.dto.participateDto">
 		UPDATE ACLAPMEMBER SET MYPOINT = MYPOINT + #{rPoint} 
 		WHERE MEMNUM = #{memNum}
 	</update>
+
 </mapper>

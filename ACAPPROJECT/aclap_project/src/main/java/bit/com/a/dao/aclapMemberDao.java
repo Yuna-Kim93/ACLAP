@@ -25,6 +25,8 @@ public interface aclapMemberDao {
 	public int googleKakaoRegi(aclapMemberDto dto);
 	public int classMasterUpdate(int memNum);
 	
+  // 관심사 조사하기
+	public String getYourInterest(int seq);
 	// 마이페이지 정보 가져오기
 	public aclapMemberDto myinfo(aclapMemberDto dto);
 	// 마이페이지_정보수정
@@ -37,8 +39,10 @@ public interface aclapMemberDao {
 	public List<aclapMemberDto> memlist(aclapParam par);
 	// 포인트충전 업데이트
 	public void chargePoints (Map<String, Object> chargePoints);
-	// 포인트 차감
+
+  // 포인트 차감
 	public int minusMyPoint(participateDto dto);
 	// 포인트 가산
 	public int pulsMyPoint(participateDto dto);
+
 }
