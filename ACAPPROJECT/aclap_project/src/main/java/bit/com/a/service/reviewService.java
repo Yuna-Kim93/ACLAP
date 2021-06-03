@@ -30,4 +30,24 @@ public class reviewService {
 		return reviewDao.getReviewList(dto);
 	}
 	
+	// 리뷰 수정
+	public boolean updateReview(reviewDto dto) {
+		return reviewDao.updateReview(dto);
+	}
+	
+	// 리뷰디테일
+	public reviewDto getReview(reviewDto dto) {
+		return reviewDao.getReview(dto);
+	}
+	
+	//리뷰 총 평균
+	public double getRatingAvg(int classNum) {
+		return reviewDao.getRatingAvg(classNum);
+	}
+	
+	//리뷰 각 항목 평균
+	public reviewDto getStarsAvg(int classNum) {
+		return reviewDao.getStarsAvg(classNum);
+	}
+
 }

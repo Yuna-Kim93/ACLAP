@@ -21,7 +21,7 @@ import bit.com.a.dto.CovidDto;
 public class CovidController {
 	
 		@RequestMapping(value="/covid", method = {RequestMethod.GET, RequestMethod.POST})
-		public static List<CovidDto> getWeatherData() throws IOException{
+		public static List<CovidDto> getCovidData() throws IOException{
 		//Jsoup : 각종 사이트에서 데이트를 취합할 수 있는 라이브러리
 			System.out.println("코로나 크롤링");
 				Document doc = Jsoup.connect("https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EC%BD%94%EB%A1%9C%EB%82%98").get();

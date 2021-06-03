@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.filechooser.FileSystemView;
@@ -31,6 +33,8 @@ public class reviewController {
 	@Autowired
 	reviewService rService;
 
+
+	
 	// 리뷰 쓰기
 		@RequestMapping(value = "/writeReview", method = RequestMethod.POST)
 		public String writeReview(reviewDto dto, MultipartHttpServletRequest req,
@@ -105,6 +109,42 @@ public class reviewController {
 			System.out.println(list.toString());
 			
 			return list;
+		}
+		
+		//리뷰 수정
+		@RequestMapping(value = "/updateReview", method = RequestMethod.POST)
+		public String updateReview(reviewDto dto, MultipartHttpServletRequest req,
+				@RequestParam("uploadFile") List<MultipartFile> files) throws Exception {
+			System.out.println("reviewController updateReview() "+ new Date());
+			
+			
+			return "";
+		}
+		
+		//작성한 리뷰 보기
+		@RequestMapping(value = "/getReview", method = {RequestMethod.GET, RequestMethod.POST})
+		public reviewDto getReview(reviewDto dto) {
+			System.out.println("reviewController getReview() "+ new Date());
+			reviewDto review = rService.getReview(dto);			
+			return review;
+		}
+		
+		// 클래스별 별점 평균
+		@RequestMapping(value = "/getAvg", method = {RequestMethod.GET, RequestMethod.POST})
+		public Map<String, Object> getRatingAvg(int classNum) {
+			System.out.println("reviewController 클래스별 별점 평균() "+ new Date());
+			System.out.println("클래스 번호(classNum)" + classNum);
+			
+			Map<String, Object> map = new HashMap<String, Object>(); 
+			//클래스 총 별점 평균
+			double avg = rService.getRatingAvg(classNum);		
+			// 클래스 항목별 별점 평균
+			reviewDto sAvg = rService.getStarsAvg(classNum);
+			map.put("avg", avg);
+			map.put("sAvg", sAvg);
+			
+			
+			return map;
 		}
 
 }

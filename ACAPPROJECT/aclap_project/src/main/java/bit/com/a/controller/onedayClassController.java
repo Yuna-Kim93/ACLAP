@@ -50,6 +50,16 @@ public class onedayClassController {
 
 		return oClass;
 	}
+	
+	// 멤버가 만든 클래스 수를 counter를 위함
+	@RequestMapping(value = "/masterClassCounter", method = RequestMethod.POST)
+	public int masterClassCounter(aclapMemberDto dto) {
+		System.out.println("masterClassCounter dto = " + dto.toString());
+		
+		int count = onedayClassService.masterClassCounter(dto);
+		
+		return count;
+	}
 
 	// TODO 문의메일 발송
 	@RequestMapping(value = "/contactMail", method = RequestMethod.POST)
