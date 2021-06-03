@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import bit.com.a.FileUploadUtiles;
 import bit.com.a.NoClassUtil;
+import bit.com.a.dto.aclapMemberDto;
 import bit.com.a.dto.noClassDateDto;
 import bit.com.a.dto.oneDayClassParam;
 import bit.com.a.dto.onedayClassDto;
@@ -48,6 +49,16 @@ public class onedayClassController {
 		System.out.println("oClass = " + oClass.toString());
 
 		return oClass;
+	}
+	
+	// 멤버가 만든 클래스 수를 counter를 위함
+	@RequestMapping(value = "/masterClassCounter", method = RequestMethod.POST)
+	public int masterClassCounter(aclapMemberDto dto) {
+		System.out.println("masterClassCounter dto = " + dto.toString());
+		
+		int count = onedayClassService.masterClassCounter(dto);
+		
+		return count;
 	}
 
 	// TODO 문의메일 발송

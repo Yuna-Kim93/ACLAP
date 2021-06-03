@@ -33,6 +33,11 @@ public class onedayClassService {
 		return onedayClassDao.getClassList(par);
 	}
 	
+	// 멤버가 만든 클래스 count
+	public int masterClassCounter(aclapMemberDto dto) {
+		return onedayClassDao.masterClassCounter(dto);
+	}
+	
 	/*
 	public int classCount(onedayParam par) {
 		System.out.println("onedayClassService classCount 왔음 " + new Date());

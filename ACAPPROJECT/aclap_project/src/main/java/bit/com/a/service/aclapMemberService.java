@@ -11,6 +11,7 @@ import bit.com.a.dao.aclapMemberDao;
 import bit.com.a.dto.aclapMemberDto;
 import bit.com.a.dto.aclapParam;
 import bit.com.a.dto.participateDto;
+import bit.com.a.dto.scheduleDto;
 
 @Service
 @Transactional
@@ -74,8 +75,18 @@ public class aclapMemberService {
 	};
 	
 	// 포인트 차감
-	public int updateMyPoint (participateDto dto) {
-		return aclapMemberDao.updateMyPoint(dto);
+	public int minusMyPoint(participateDto dto) {
+		return aclapMemberDao.minusMyPoint(dto);
+	}
+	
+	// 포인트 가산
+	public int pulsMyPoint(participateDto dto) {
+		return aclapMemberDao.pulsMyPoint(dto);
+	}
+	
+	// 나의 정보 가져오기
+	public aclapMemberDto getMemberDto(aclapMemberDto dto) {
+		return aclapMemberDao.myinfo(dto);
 	}
 	// 네이버 블로그 크롤링을 위해 매번 관심사 조사해서 받아주기 위한것
 	public String getYourInterest(int seq) {
