@@ -76,6 +76,15 @@ public class scheduleController {
 		return clsMap;
 	}
 	
+	@RequestMapping(value="/getReceiptData", method = {RequestMethod.GET, RequestMethod.POST}) 
+	public participateDto getReceiptData(participateDto dto){ 
+		System.out.println("getReciptData dto = " + dto.toString());
+		
+		participateDto receipt = scheduleService.getReceiptData(dto);
+		
+		return receipt;
+	}
+	
 	// 참여하였을 경우
 	@RequestMapping(value="/participate", method = {RequestMethod.GET, RequestMethod.POST}) 
 	public String participate(participateDto dto){ 
@@ -87,8 +96,9 @@ public class scheduleController {
 		System.out.println(gDto.toString());
 		
 		// 나의 포인트 차감
-		int count1 = aclapMemberService.updateMyPoint(dto);
+		int count1 = aclapMemberService.minusMyPoint(dto);
 		System.out.println("count1 = " + count1);
+		
 		// 원데이클래스 오리진 넘버
 		int count2 = onedayClassService.updateNewRegNum(dto);
 		System.out.println("count2 = " + count2);
@@ -97,7 +107,9 @@ public class scheduleController {
 		dto.setPrimaryCategory(gDto.getPrimaryCategory());
 		dto.setSecondaryCategory(gDto.getSecondaryCategory());
 		System.out.println(dto.toString());
-		// 스탬프, 포인트, 스케줄
+		
+		
+		// 스탬프, 포인트, 스케줄, 영수증
 		int count3 = scheduleService.participate(dto);
 		System.out.println("count3 = " + count3);
 		
@@ -107,5 +119,17 @@ public class scheduleController {
 		
 		return "성공이다아~";
 	}
-	 
+	
+	// 일정 취소를 하였을 경우
+	@RequestMapping(value="/cancelSchedule", method = {RequestMethod.GET, RequestMethod.POST}) 
+	public String cancelSchedule(participateDto dto){ 
+		System.out.println("cancelSchedule dto = " + dto.toString());
+		
+		//포인트 가산
+		int count1 = aclapMemberService.pulsMyPoint(dto);
+		
+		// 스탬프, 스케줄
+		
+		return "일정이 취소되었습니다.";
+	}
 }

@@ -8,7 +8,7 @@
     <!-- 일반 회원가입 -->
 	<insert id="addMember" parameterType="bit.com.a.dto.aclapMemberDto">
 		INSERT INTO ACLAPMEMBER (MEMNUM, EMAIL, PWD, USERNAME, NICKNAME, PHONENUM, PROFILEPIC, AUTH, CLASSMASTER, MYPOINT)
-		VALUES(SEQ_MEMBER.NEXTVAL, #{email}, #{pwd}, #{userName}, #{nickName}, #{phoneNum}, #{profilePic}, 3, 0, 0)
+		VALUES(SEQ_MEMBER.NEXTVAL, #{email}, #{pwd}, #{userName}, #{nickName}, #{phoneNum}, #{profilePic}, 3, 0, 3000)
 	</insert>
 
 
@@ -129,9 +129,13 @@
 		WHERE EMAIL=#{email}
 	</update>
 
-	<update id="updateMyPoint" parameterType="bit.com.a.dto.participateDto">
+	<update id="minusMyPoint" parameterType="bit.com.a.dto.participateDto">
 		UPDATE ACLAPMEMBER SET MYPOINT = MYPOINT - #{rPoint} 
 		WHERE MEMNUM = #{memNum}
 	</update>
-
+	
+	<update id="plusMyPoint" parameterType="bit.com.a.dto.participateDto">
+		UPDATE ACLAPMEMBER SET MYPOINT = MYPOINT + #{rPoint} 
+		WHERE MEMNUM = #{memNum}
+	</update>
 </mapper>

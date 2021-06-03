@@ -10,6 +10,7 @@ import bit.com.a.dto.aclapMemberDto;
 import bit.com.a.dto.aclapParam;
 import bit.com.a.dto.onedayClassDto;
 import bit.com.a.dto.participateDto;
+import bit.com.a.dto.scheduleDto;
 
 @Mapper
 @Repository
@@ -37,5 +38,7 @@ public interface aclapMemberDao {
 	// 포인트충전 업데이트
 	public void chargePoints (Map<String, Object> chargePoints);
 	// 포인트 차감
-	public int updateMyPoint (participateDto dto);
+	public int minusMyPoint(participateDto dto);
+	// 포인트 가산
+	public int pulsMyPoint(participateDto dto);
 }
