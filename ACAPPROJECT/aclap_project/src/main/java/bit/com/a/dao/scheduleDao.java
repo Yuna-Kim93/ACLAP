@@ -41,4 +41,10 @@ public interface scheduleDao {
 	
 	// 스탬프 추가
 	public int addStamp(participateDto dto);
+	
+	// 영수증 추가
+	public int addReceipt(participateDto dto);
+	
+	// 해당 일자 영수증 가져오기
+	public participateDto getReceiptData(participateDto dto);
 }
