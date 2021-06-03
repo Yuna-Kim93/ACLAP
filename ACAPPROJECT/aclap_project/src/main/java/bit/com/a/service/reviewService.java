@@ -49,4 +49,5 @@ public class reviewService {
 	public reviewDto getStarsAvg(int classNum) {
 		return reviewDao.getStarsAvg(classNum);
 	}
+
 }

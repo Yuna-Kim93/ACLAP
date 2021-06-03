@@ -22,10 +22,11 @@ public interface onedayClassDao {
 		// 관리자 페이지 리스트
 		public List<onedayClassDto> getClassList(onedayParam par);
 		
-		//my page
+		// ondayClass Dtail
 		public onedayClassDto getOnedayClass(onedayClassDto dto);
 		
-
+		// 멤버가 만든 클래스 count
+		public int masterClassCounter(aclapMemberDto dto);
 		
 
 		// 나의 도장판 현황

@@ -81,6 +81,13 @@ public class scheduleService {
 		// 스탬프 추가
 		int j = scheduleDao.addStamp(dto);
 		
-		return i*j;
+		// 영수증 추가
+		int z = scheduleDao.addReceipt(dto);
+		
+		return i*j*z;
+	}
+
+	public participateDto getReceiptData(participateDto dto) {
+		return scheduleDao.getReceiptData(dto);
 	}
 }
