@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import bit.com.a.FileUploadUtiles;
 import bit.com.a.NoClassUtil;
+import bit.com.a.dto.aclapMemberDto;
 import bit.com.a.dto.noClassDateDto;
 import bit.com.a.dto.oneDayClassParam;
 import bit.com.a.dto.onedayClassDto;
@@ -122,19 +123,20 @@ public class onedayClassController {
 	
 	// HOME_추천클래스 출력 
 	@RequestMapping(value = "/getRecommendClassList", method = { RequestMethod.GET, RequestMethod.POST })
-	public List<onedayClassDto> getRecommendClassList() {
+	public List<onedayClassDto> getRecommendClassList(aclapMemberDto dto) {
 		System.out.println("////////// oneDayClassController getRecommendClassList() //////////");
+		
+		System.out.println("interest1 : " + dto.getInterest1());
+		System.out.println("interest2 : " + dto.getInterest2());
+		System.out.println("interest3 : " + dto.getInterest3());
 
-
-		List<onedayClassDto> list = onedayClassService.getBestClassList();
+		List<onedayClassDto> list = onedayClassService.getRecommendClassList(dto);
 		if (list.size() != 0)
 			System.out.println("getRecommendClassList Success");
 		return list;
 	}
-	
-	
-	// 클래스 만들기 
 
+	// 클래스 만들기 
 	@RequestMapping(value = "/onedayClassWrite", method = RequestMethod.POST)
 	public boolean addMember(onedayClassDto dto, HttpServletRequest req, String noClassDayOfWeek, 
 			@RequestParam("imageA1") MultipartFile imageA1, @RequestParam("imageA2") MultipartFile imageA2,

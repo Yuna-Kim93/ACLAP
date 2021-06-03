@@ -47,6 +47,11 @@ public interface onedayClassDao {
 		// home : 클래스 인기순 출력
 		public List<onedayClassDto> getBestClassList();
 		
+		// home : 추천 클래스 출력
+		public List<onedayClassDto> getRecommendClassList(aclapMemberDto dto);
+		
+		
+		
 		// 클래스 생성하기 
 		public int onedayClassWrite(onedayClassDto dto);	
 		

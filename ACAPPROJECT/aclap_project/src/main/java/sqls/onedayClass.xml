@@ -72,7 +72,6 @@ ORDER BY O.LIKECOUNT DESC
 	WHERE RNUM BETWEEN 1 AND 9
 </select>
 
-
 <!-- home : 클래스 인기순 출력 -->
 <select id="getBestClassList" resultType="bit.com.a.dto.onedayClassDto">
 	SELECT CLASSNUM, INSTRUCTOR, TITLE, IMAGE1, ENDDATE
@@ -83,7 +82,18 @@ ORDER BY O.LIKECOUNT DESC
 	WHERE RNUM BETWEEN 1 AND 9
 </select>
 
-
+<!-- home : 추천 클래스 -->
+<select id="getRecommendClassList" parameterType="bit.com.a.dto.aclapMemberDto" resultType="bit.com.a.dto.onedayClassDto">
+	SELECT CLASSNUM, INSTRUCTOR, TITLE, IMAGE1, ENDDATE, SECONDARYCATEGORY
+	FROM (SELECT ROW_NUMBER()OVER(ORDER BY LIKECOUNT DESC) AS RNUM, 
+				 CLASSNUM, INSTRUCTOR, TITLE, IMAGE1, ENDDATE, SECONDARYCATEGORY
+		  FROM ONEDAYCLASS 
+		  WHERE DEL=0 AND 
+				SECONDARYCATEGORY LIKE '%'||#{interest1}||'%' OR 
+				SECONDARYCATEGORY LIKE '%'||#{interest2}||'%' OR 
+				SECONDARYCATEGORY LIKE '%'||#{interest3}||'%') 
+	WHERE RNUM BETWEEN 1 AND 9
+</select> 
 
 
 <!-- 클래스 만들기 -->
