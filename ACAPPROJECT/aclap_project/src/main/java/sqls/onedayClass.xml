@@ -116,12 +116,43 @@ ORDER BY O.LIKECOUNT DESC
 		       #{image1}, #{image2}, #{image3}, #{image4}, #{image5}, #{location}, #{youtubeLink}, 0, 0, 0, 0, #{layerSelect})
 </insert>
 
+
 <!-- 클래스 생성 후 classNum 가져오기 -->
 <select id="onedayClassWriteAfClassNum" resultType="java.lang.Integer">
 	SELECT CLASSNUM
 	FROM ONEDAYCLASS
 	WHERE MASTERNUM=#{masterNum} AND INSTRUCTOR=#{instructor} AND TITLE=#{title} AND LOCATION=#{location}
 </select>
+
+
+<!-- 클래스 수정 전 뿌려줄 모든 정보 -->
+<select id="onedayClassInfo"  parameterType="bit.com.a.dto.onedayClassDto" resultType="bit.com.a.dto.onedayClassDto">
+	SELECT INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, CONTENT, STARTDATE, ENDDATE, PRICE, INFORMATION, DURATION, LIMITNUM, PREPARATION,
+		   ABOUTME, IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, LOCATION, NVL(YOUTUBELINK, ' ') AS YOUTUBELINK, EMAIL, PROFILEPIC, LAYERSELECT
+	FROM ONEDAYCLASS X, ACLAPMEMBER Y
+	WHERE X.MASTERNUM= Y.MEMNUM AND X.CLASSNUM=${classNum}
+</select>
+
+<!-- 클래스 수정 -->
+<update id="onedayClassUpdate" parameterType="bit.com.a.dto.onedayClassDto">
+		UPDATE ONEDAYCLASS 
+		SET PRIMARYCATEGORY=#{primaryCategory}, TITLE=#{title}, STARTDATE=#{startDate},	ENDDATE=#{endDate}, 
+			PRICE=#{price}, DURATION=#{duration}, LIMITNUM=#{limitNum}, PREPARATION=#{preparation}, ABOUTME=#{aboutMe}, 
+		 	 <if test="image1 != null">
+		 	IMAGE1=#{image1}, IMAGE2=#{image2}, IMAGE3=#{image3}, IMAGE4=#{image4}, IMAGE5=#{image5},
+			</if>
+			CONTENT=#{content}, INFORMATION=#{information}, LAYERSELECT=#{layerSelect}, 
+			LOCATION=#{location}, YOUTUBELINK=#{youtubeLink}
+		WHERE CLASSNUM=#{classNum}	
+</update> 
+
+<!-- 클래스 삭제(숨기기) -->
+<update id="onedayClassDelete" parameterType="bit.com.a.dto.participateDto">
+	UPDATE ONEDAYCLASS 
+	SET DEL=1
+	WHERE CLASSNUM = #{classNum}
+</update>
+
 
 <update id="updateNewRegNum" parameterType="bit.com.a.dto.participateDto">
 	UPDATE ONEDAYCLASS SET NEWREGNUM = NEWREGNUM + 1

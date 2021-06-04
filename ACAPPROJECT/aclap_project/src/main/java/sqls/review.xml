@@ -38,12 +38,13 @@
    </select>
    
    
-   <!-- 모든 별점 평균 --> 
+   <!-- 모든 별점 평균--> 
    <select id="getRatingAvg" parameterType="java.lang.Integer" resultType="_double">
-   		SELECT AVG(STARPOINT) AS AVGPOINT
-		FROM REVIEW R, ONEDAYCLASS O
- 		WHERE R.CLASSNUM = O.CLASSNUM AND O.CLASSNUM = #{classNum}   		
+	  SELECT NVL(TRUNC(AVG(STARPOINT), 1), 0) AS AVGPOINT
+      FROM REVIEW
+      WHERE CLASSNUM = #{classNum} AND NOT MEMNUM=1		
    </select>
+  
    
    <!--각 항목에 대한 별점 평균 -->
    <select id="getStarsAvg" parameterType="java.lang.Integer" resultType="bit.com.a.dto.reviewDto">   		

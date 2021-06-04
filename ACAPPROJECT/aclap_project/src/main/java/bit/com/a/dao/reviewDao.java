@@ -18,6 +18,7 @@ public interface reviewDao {
 
 	// 리뷰쓰기 
 	boolean writeReview (reviewDto dto);
+	
 	// 리뷰 리스트 가져오기
 	public List<reviewDto> getReviewList(reviewDto dto);
 	
