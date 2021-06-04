@@ -22,14 +22,15 @@ public class FileUploadUtiles {
 
 	
 	// newfilename 만들기
-	public static String getNewFilename1(String f) {
+public static String getNewFilename(String f, int num) {
+
 		String filename = "";
 		String fpost = "";
 
 		//확장자명이 있다면
 		if(f.indexOf('.') >= 0) {
 			fpost = f.substring( f.indexOf('.') );	    // 확장자 
-			filename = new Date().getTime() + fpost;    // newfilename 
+			filename = new Date().getTime() + num + fpost;    // newfilename 
 		}
 		//확장자명이 없다면
 		else {

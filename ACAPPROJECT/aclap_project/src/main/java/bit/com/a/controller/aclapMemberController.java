@@ -118,7 +118,7 @@ public class aclapMemberController {
 		else {
 						
 			String uploadPath = req.getServletContext().getRealPath("/upload"); 	
-			String newFilename = FileUploadUtiles.getNewFilename(f);
+			String newFilename = FileUploadUtiles.getNewFilename(f, 1);
 		 // String newFilename = "sample.png"; 샘플 프로필 이미지 서버 저장용 (서버 생성 시 미리 웹에 저장할 것)
 				
 			String filepath = uploadPath + File.separator + newFilename;
@@ -198,7 +198,7 @@ public class aclapMemberController {
 		else {
 						
 			String uploadPath = req.getServletContext().getRealPath("/upload"); 	
-			String newFilename = FileUploadUtiles.getNewFilename(f);
+			String newFilename = FileUploadUtiles.getNewFilename(f, 1);
 		 // String newFilename = "sample.png"; 샘플 프로필 이미지 서버 저장용 (서버 생성 시 미리 웹에 저장할 것)
 				
 			String filepath = uploadPath + File.separator + newFilename;

@@ -43,6 +43,6 @@ public interface aclapMemberDao {
   // 포인트 차감
 	public int minusMyPoint(participateDto dto);
 	// 포인트 가산
-	public int pulsMyPoint(participateDto dto);
+	public int plusMyPoint(participateDto dto);
 
 }
