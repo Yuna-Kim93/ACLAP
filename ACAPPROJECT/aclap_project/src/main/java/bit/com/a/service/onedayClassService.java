@@ -90,7 +90,7 @@ public class onedayClassService {
 		return onedayClassDao.getRecommendClassList(dto);
 	};
 
-
+	//----------------------생성 수정 삭제 ----------------------
 	// 원데이클래스 생성
 	public int onedayClassWrite(onedayClassDto dto) {
 		int n = onedayClassDao.onedayClassWrite(dto);
@@ -99,6 +99,32 @@ public class onedayClassService {
 		List<Integer> classSeq = onedayClassDao.onedayClassWriteAfClassNum(dto);
 		return classSeq.get(0);
 	};		
+	
+	// 클래스 수정하기
+	public int onedayClassUpdate(onedayClassDto dto) {
+		int n = onedayClassDao.onedayClassUpdate(dto);
+		if(n>0)
+			System.out.println("=== onedayClassUpdate Success ===");
+		return n;
+	};
+	
+	// 클래스 수정 전 뿌려줄 모든 정보 
+	public onedayClassDto onedayClassInfo(onedayClassDto dto) {
+		onedayClassDto d = onedayClassDao.onedayClassInfo(dto);
+		if(d != null)
+			System.out.println("=== (Service) onedayClassInfo Success ===");
+		return onedayClassDao.onedayClassInfo(dto);
+	};
+	
+	// 클래스 삭제하기
+	public int onedayClassDelete(onedayClassDto dto) {
+		int n = onedayClassDao.onedayClassDelete(dto);
+		if(n>0)
+			System.out.println("=== onedayClassDelete Success ===");
+		return n;
+	};
+	
+	
 	
 	// 참여자 수를 NewRegNum에 update
 	public int updateNewRegNum(participateDto dto) {
