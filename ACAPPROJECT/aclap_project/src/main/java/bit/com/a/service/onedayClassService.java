@@ -104,4 +104,13 @@ public class onedayClassService {
 	public int updateNewRegNum(participateDto dto) {
 		return onedayClassDao.updateNewRegNum(dto);
 	}
+	
+	//내가 개설한 클래스의 정보 가져오기.
+	public List<onedayClassDto> getMyClassList(int masterNum) {
+		return onedayClassDao.getMyClassList(masterNum);
+	}
+	//내가 개설한 클래스 클릭시 참가자 보기
+	public List<aclapMemberDto> getMyClassParticipants(int classNum) {
+		return onedayClassDao.getMyClassParticipants(classNum);
+	}
 }

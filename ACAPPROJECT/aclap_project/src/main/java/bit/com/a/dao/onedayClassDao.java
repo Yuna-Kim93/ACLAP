@@ -63,4 +63,9 @@ public interface onedayClassDao {
 		
 		// 참여자 수를 NewRegNum에 update
 		public int updateNewRegNum(participateDto dto);
+		
+		//내가 개설한 클래스 정보 가져오기
+		public List<onedayClassDto> getMyClassList(int masterNum);
+		//내가 개설한 클래스 클릭시 참가자 보기
+		public List<aclapMemberDto> getMyClassParticipants(int classNum);
 }

@@ -60,8 +60,8 @@ ORDER BY RDATE
 </select>
 
 <insert id="addSchedule" parameterType="bit.com.a.dto.participateDto">
-	INSERT INTO SCHEDULE (SCHEDULENUM, RDATE, MEMNUM, CLASSNUM, PARTICIPANTS DEL)
-	VALUES(SEQ_SCHEDULE.NEXTVAL, #{cDate}, #{memNum}, #{classNum}, #{participants}, 0)
+	INSERT INTO SCHEDULE (SCHEDULENUM, RDATE, MEMNUM, CLASSNUM, PARTICIPANTS, DEL)
+	VALUES(SEQ_SCHEDULE.NEXTVAL, #{classDate}, #{memNum}, #{classNum}, #{participants}, 0)
 </insert>
 
 <insert id="addStamp" parameterType="bit.com.a.dto.participateDto">
@@ -79,4 +79,5 @@ ORDER BY RDATE
 	FROM RECEIPT R, (SELECT TITLE FROM ONEDAYCLASS WHERE CLASSNUM = #{classNum}) O
 	WHERE CLASSDATE=#{classDate} AND CLASSNUM=#{classNum} AND MEMNUM=#{memNum}
 </select>
+
 </mapper>
