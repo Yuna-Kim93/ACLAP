@@ -205,6 +205,7 @@ public class onedayClassController {
 		 String newFilename3 = FileUploadUtiles.getNewFilename(image3, 3); 
 		 String newFilename4 = FileUploadUtiles.getNewFilename(image4, 4); 
 		 String newFilename5 = FileUploadUtiles.getNewFilename(image5, 5);
+
 		  
 		 System.out.println("/// 파일이름 체크(1) ///");
 		 System.out.println(image1);

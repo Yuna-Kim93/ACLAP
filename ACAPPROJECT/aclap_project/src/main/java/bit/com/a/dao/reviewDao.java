@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 
 import bit.com.a.dto.reviewDto;
+import bit.com.a.dto.scheduleDto;
 
 
 @Mapper
@@ -31,4 +32,8 @@ public interface reviewDao {
 	public double getRatingAvg(int classNum);
 
 	public reviewDto getStarsAvg(int classNum);
+
+	public int checkMember(scheduleDto dto);
+
+	public void reviewDel(reviewDto dto);
 }
