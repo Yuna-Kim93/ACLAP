@@ -47,19 +47,19 @@ public class scheduleService {
 		System.out.println("clist = " + clist);
 		
 		// classSchedulCount List
-		List<classSchedulCount> countlist = scheduleDao.classSchedulCount(dto);
-		System.out.println("countlist : " + countlist.toString());
+		List<scheduleDto> participantslist = scheduleDao.classParticipantsList(dto);
+		System.out.println("countlist : " + participantslist.toString());
 		
 		for(int i=0; i<clist.size(); i++) {
 			classScheduleDto classdto = clist.get(i);
 
 			// System.out.println((classdto.getRdate()).substring(0, 10));
-			for(int j=0; j<countlist.size();j++) {
-				classSchedulCount count = countlist.get(j);
+			for(int j=0; j<participantslist.size();j++) {
+				scheduleDto participants = participantslist.get(j);
 				
-				if( (classdto.getRdate()).substring(0, 10).equals(count.getRdate())) {
+				if( (classdto.getRdate()).substring(0, 10).equals(participants.getRdate())) {
 					
-					int limitnum = Integer.parseInt( classdto.getLimitNum() ) - count.getCount();
+					int limitnum = Integer.parseInt( classdto.getLimitNum() ) - participants.getParticipants();
 					classdto.setLimitNum(Integer.toString( limitnum ));
 					clist.set(i, classdto);
 				}
@@ -86,8 +86,22 @@ public class scheduleService {
 		
 		return i*j*z;
 	}
-
+	
 	public participateDto getReceiptData(participateDto dto) {
 		return scheduleDao.getReceiptData(dto);
+	}
+
+	public int cancelSchedule(participateDto dto) {
+		// 스케줄 del = 1
+		int i = scheduleDao.updateDelSchedule(dto);
+		
+		// 스탬프 delete
+		int j = scheduleDao.deleteStamp(dto);
+		
+		return i*j;
+	}
+
+	public int getIncludMember(scheduleDto dto) {
+		return scheduleDao.getIncludMember(dto);
 	}
 }
