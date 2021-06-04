@@ -205,11 +205,11 @@ public class onedayClassController {
 		 }
 		 
 		 // FewFileName Setting
-		 String newFilename1 = FileUploadUtiles.getNewFilename(image1); 
-		 String newFilename2 = FileUploadUtiles.getNewFilename(image2); 
-		 String newFilename3 = FileUploadUtiles.getNewFilename(image3); 
-		 String newFilename4 = FileUploadUtiles.getNewFilename(image4); 
-		 String newFilename5 = FileUploadUtiles.getNewFilename(image5);
+		 String newFilename1 = FileUploadUtiles.getNewFilename1(image1); 
+		 String newFilename2 = FileUploadUtiles.getNewFilename1(image2); 
+		 String newFilename3 = FileUploadUtiles.getNewFilename1(image3); 
+		 String newFilename4 = FileUploadUtiles.getNewFilename1(image4); 
+		 String newFilename5 = FileUploadUtiles.getNewFilename1(image5);
 		  
 		 // filepath Setting
 		 String uploadPath = req.getServletContext().getRealPath("/upload");

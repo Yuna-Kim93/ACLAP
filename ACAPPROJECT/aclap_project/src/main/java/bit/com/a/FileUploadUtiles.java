@@ -22,7 +22,7 @@ public class FileUploadUtiles {
 
 	
 	// newfilename 만들기
-	public static String getNewFilename(String f) {
+	public static String getNewFilename1(String f) {
 		String filename = "";
 		String fpost = "";
 
