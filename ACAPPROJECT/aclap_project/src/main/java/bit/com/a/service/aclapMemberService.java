@@ -80,8 +80,8 @@ public class aclapMemberService {
 	}
 	
 	// 포인트 가산
-	public int pulsMyPoint(participateDto dto) {
-		return aclapMemberDao.pulsMyPoint(dto);
+	public int plusMyPoint(participateDto dto) {
+		return aclapMemberDao.plusMyPoint(dto);
 	}
 	
 	// 나의 정보 가져오기
