@@ -128,4 +128,18 @@ ORDER BY O.LIKECOUNT DESC
 	WHERE CLASSNUM = #{classNum}
 </update>
 
+<!-- 내가 개설한 클래스 정보 리스트 가져오기 -->
+<select id="getMyClassList" parameterType="int" resultType="bit.com.a.dto.onedayClassDto">
+	SELECT CLASSNUM, TITLE, LIKECOUNT, STARTDATE, ENDDATE
+	FROM ONEDAYCLASS
+	WHERE MASTERNUM = #{masterNum}
+	ORDER BY CLASSNUM
+</select>
+
+<!-- 내가 개설한 클래스 클릭시 참가자 보기 -->
+<select id="getMyClassParticipants" parameterType="int" resultType="bit.com.a.dto.scheduleDto">
+SELECT RDATE, PARTICIPANTS, USERNAME AS NAME, NICKNAME, PROFILEPIC, EMAIL 
+FROM SCHEDULE S, ACLAPMEMBER A
+WHERE S.DEL =0 AND S.MEMNUM = A.MEMNUM AND S.CLASSNUM=#{classNum}
+</select>
 </mapper>
