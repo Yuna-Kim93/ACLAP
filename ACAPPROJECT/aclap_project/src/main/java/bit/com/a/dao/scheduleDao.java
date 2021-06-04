@@ -30,6 +30,9 @@ public interface scheduleDao {
 	// classDtail.html에서 classSchedule을 얻기 위함
 	public List<classScheduleDto> classScheduleList(onedayClassDto dto);
 	
+	// 해당 수업 스케줄 당 참가자를 얻기 위함
+	public List<scheduleDto> classParticipantsList(onedayClassDto dto);
+	
 	// classDtail.html에서 해당 일에 신청자 수를 얻기 위함
 	public List<classSchedulCount> classSchedulCount(onedayClassDto dto);
 	
@@ -44,7 +47,13 @@ public interface scheduleDao {
 	
 	// 영수증 추가
 	public int addReceipt(participateDto dto);
-	
+
 	// 해당 일자 영수증 가져오기
 	public participateDto getReceiptData(participateDto dto);
+
+	public int updateDelSchedule(participateDto dto);
+
+	public int deleteStamp(participateDto dto);
+
+	public int getIncludMember(scheduleDto dto);
 }

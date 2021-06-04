@@ -124,7 +124,7 @@ ORDER BY O.LIKECOUNT DESC
 </select>
 
 <update id="updateNewRegNum" parameterType="bit.com.a.dto.participateDto">
-	UPDATE ONEDAYCLASS SET NEWREGNUM = NEWREGNUM + #{participants}
+	UPDATE ONEDAYCLASS SET NEWREGNUM = NEWREGNUM + 1
 	WHERE CLASSNUM = #{classNum}
 </update>
 

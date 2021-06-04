@@ -22,6 +22,16 @@ public class scheduleDto {
 	public scheduleDto() {
 	}
 	
+	public scheduleDto(int scheduleNum, String rdate, int participants, int del) {
+		super();
+		this.scheduleNum = scheduleNum;
+		this.rdate = rdate;
+		this.participants = participants;
+		this.del = del;
+	}
+
+
+
 	public scheduleDto(int scheduleNum, String rdate, int memNum, int classNum, int del) {
 		super();
 		this.scheduleNum = scheduleNum;
