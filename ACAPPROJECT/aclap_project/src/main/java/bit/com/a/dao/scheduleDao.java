@@ -39,11 +39,20 @@ public interface scheduleDao {
 	// NOCLASSDATE를 얻기 위함
 	public List<classScheduleDto> noDateList(onedayClassDto dto);
 	
+	// 이미 있는 스케줄인지 검사
+	public int getIncludSchedule(participateDto dto);
+	
+	// 다시 해당일자에 신청할때 업데이트를 위함
+	public int updateSchedule(participateDto dto);
+	
 	// 스케줄 추가
 	public int addSchedule(participateDto dto);
 	
 	// 스탬프 추가
 	public int addStamp(participateDto dto);
+	
+	// 다시 해당일자에 신청할때 영수증 업데이트를 위함
+	public int updateReceipt(participateDto dto);
 	
 	// 영수증 추가
 	public int addReceipt(participateDto dto);
@@ -56,4 +65,6 @@ public interface scheduleDao {
 	public int deleteStamp(participateDto dto);
 
 	public int getIncludMember(scheduleDto dto);
+
+
 }
