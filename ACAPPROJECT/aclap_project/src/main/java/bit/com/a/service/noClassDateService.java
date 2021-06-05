@@ -18,10 +18,20 @@ public class noClassDateService {
 	@Autowired
 	noClassDateDao noClassDateDao; 
 	
+	// 추가
 	public void addNoClassDate(noClassDateDto dto) {
 		noClassDateDao.addNoClassDate(dto);
-		System.out.println("== addNoClassDate Success! ==");
+		System.out.println("== (Service) addNoClassDate Success! ==");
 	};
+	
+	// 삭제
+	public void deleteNoClassDate(onedayClassDto dto) {
+		int n = noClassDateDao.deleteNoClassDate(dto);
+		if(n>0)
+			System.out.println("=== (Service) deleteNoClass Success ===");
+	};
+	
+	// 출력
 	public List<String> getNoClassDate(onedayClassDto dto){
 		List <String> list = noClassDateDao.getNoClassDate(dto);
 		List <String> output = new ArrayList<>();
@@ -32,4 +42,5 @@ public class noClassDateService {
 		}
 		return output;
 	};
+
 }

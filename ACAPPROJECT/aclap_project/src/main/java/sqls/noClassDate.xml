@@ -17,5 +17,11 @@
 		FROM NOCLASSDATE
 		WHERE CLASSNUM = #{classNum}
 	</select>
-  
+		
+	<!-- NoClass 삭제 -->
+	<delete id= "deleteNoClassDate" parameterType="bit.com.a.dto.noClassDateDto">
+		DELETE FROM NOCLASSDATE
+		WHERE CLASSNUM=#{classNum}
+	</delete>
+
   </mapper>

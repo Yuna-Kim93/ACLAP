@@ -121,7 +121,8 @@ ORDER BY O.LIKECOUNT DESC
 <select id="onedayClassWriteAfClassNum" resultType="java.lang.Integer">
 	SELECT CLASSNUM
 	FROM ONEDAYCLASS
-	WHERE MASTERNUM=#{masterNum} AND INSTRUCTOR=#{instructor} AND TITLE=#{title} AND LOCATION=#{location}
+	WHERE MASTERNUM=#{masterNum} AND TITLE=#{title} AND PRIMARYCATEGORY=#{primaryCategory} AND SECONDARYCATEGORY=#{secondaryCategory}
+		  AND STARTDATE=#{startDate} AND ENDDATE=#{endDate} AND PRICE=#{price} AND LOCATION=#{location}
 </select>
 
 
@@ -136,11 +137,13 @@ ORDER BY O.LIKECOUNT DESC
 <!-- 클래스 수정 -->
 <update id="onedayClassUpdate" parameterType="bit.com.a.dto.onedayClassDto">
 		UPDATE ONEDAYCLASS 
-		SET PRIMARYCATEGORY=#{primaryCategory}, TITLE=#{title}, STARTDATE=#{startDate},	ENDDATE=#{endDate}, 
+		SET PRIMARYCATEGORY=#{primaryCategory}, SECONDARYCATEGORY=#{secondaryCategory}, TITLE=#{title}, STARTDATE=#{startDate},	ENDDATE=#{endDate}, 
 			PRICE=#{price}, DURATION=#{duration}, LIMITNUM=#{limitNum}, PREPARATION=#{preparation}, ABOUTME=#{aboutMe}, 
-		 	 <if test="image1 != null">
-		 	IMAGE1=#{image1}, IMAGE2=#{image2}, IMAGE3=#{image3}, IMAGE4=#{image4}, IMAGE5=#{image5},
-			</if>
+		 	<if test="image1 != null">IMAGE1=#{image1},</if>
+		 	<if test="image2 != null">IMAGE2=#{image2},</if>
+		 	<if test="image3 != null">IMAGE3=#{image3},</if>
+		 	<if test="image4 != null">IMAGE4=#{image4},</if>
+		 	<if test="image5 != null">IMAGE5=#{image5},</if>
 			CONTENT=#{content}, INFORMATION=#{information}, LAYERSELECT=#{layerSelect}, 
 			LOCATION=#{location}, YOUTUBELINK=#{youtubeLink}
 		WHERE CLASSNUM=#{classNum}	

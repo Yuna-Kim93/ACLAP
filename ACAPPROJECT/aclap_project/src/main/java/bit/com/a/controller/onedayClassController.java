@@ -146,7 +146,7 @@ public class onedayClassController {
 
 	// 클래스 만들기 
 	@RequestMapping(value = "/onedayClassWrite", method = RequestMethod.POST)
-	public int onedayClassWrite(onedayClassDto dto, HttpServletRequest req, String noClassDayOfWeek, 
+	public int onedayClassWrite(onedayClassDto dto, HttpServletRequest req,
 			@RequestParam("imageA1") MultipartFile imageA1, @RequestParam("imageA2") MultipartFile imageA2,
 			@RequestParam("imageA3") MultipartFile imageA3, @RequestParam("imageA4") MultipartFile imageA4,
 			@RequestParam("imageA5") MultipartFile imageA5, @RequestParam("imageB1") MultipartFile imageB1,
@@ -206,7 +206,14 @@ public class onedayClassController {
 		 String newFilename4 = FileUploadUtiles.getNewFilename(image4, 4); 
 		 String newFilename5 = FileUploadUtiles.getNewFilename(image5, 5);
 
-		  
+		 // filepath Setting
+		 String uploadPath = req.getServletContext().getRealPath("/upload");
+		 String filepath1 = uploadPath + File.separator + newFilename1; 
+		 String filepath2 = uploadPath + File.separator + newFilename2; 
+		 String filepath3 = uploadPath + File.separator + newFilename3; 
+		 String filepath4 = uploadPath + File.separator + newFilename4; 
+		 String filepath5 = uploadPath + File.separator + newFilename5;
+		 
 		 System.out.println("/// 파일이름 체크(1) ///");
 		 System.out.println(image1);
 		 System.out.println(image2);
@@ -221,15 +228,6 @@ public class onedayClassController {
 		 System.out.println(newFilename4);
 		 System.out.println(newFilename5);
 		 
-		 
-		 // filepath Setting
-		 String uploadPath = req.getServletContext().getRealPath("/upload");
-		 String filepath1 = uploadPath + File.separator + newFilename1; 
-		 String filepath2 = uploadPath + File.separator + newFilename2; 
-		 String filepath3 = uploadPath + File.separator + newFilename3; 
-		 String filepath4 = uploadPath + File.separator + newFilename4; 
-		 String filepath5 = uploadPath + File.separator + newFilename5;
-		  
 		 System.out.println("/// 파일이름 체크(3) ///");
 		 System.out.println("Img Path : "+ filepath1); 
 		 System.out.println("Img Path : "+ filepath2); 
@@ -295,11 +293,11 @@ public class onedayClassController {
 			  noClassDateDto noClass = new noClassDateDto();
 			  noClass.setClassNum(classSeq);
 	
-			  if (noClassDayOfWeek == "") {
+			  if (dto.getNoClass() == "") {
 				  noClass.setNoClassDate("1991-04-02");
 			  } 
 			  else {
-				  List<String> list = NoClassUtil.getNoClassList(dto.getStartDate(), dto.getEndDate(), noClassDayOfWeek);
+				  List<String> list = NoClassUtil.getNoClassList(dto.getStartDate(), dto.getEndDate(), dto.getNoClass());
 				  for (String noDate : list) {
 					  noClass.setNoClassDate(noDate);
 					  noClassDateService.addNoClassDate(noClass);
@@ -333,7 +331,7 @@ public class onedayClassController {
 	
 	// 클래스 수정 
 	@RequestMapping(value = "/onedayClassUpdate", method = RequestMethod.POST)
-	public boolean onedayClassUpdate(onedayClassDto dto, HttpServletRequest req, String noClassDayOfWeek, 
+	public int onedayClassUpdate(onedayClassDto dto, HttpServletRequest req,
 			@RequestParam("imageA1") MultipartFile imageA1, @RequestParam("imageA2") MultipartFile imageA2,
 			@RequestParam("imageA3") MultipartFile imageA3, @RequestParam("imageA4") MultipartFile imageA4,
 			@RequestParam("imageA5") MultipartFile imageA5, @RequestParam("imageB1") MultipartFile imageB1,
@@ -344,13 +342,12 @@ public class onedayClassController {
 			@RequestParam("imageC5") MultipartFile imageC5) {
 		
 		System.out.println("////////// onedayClassDto onedayClassUpdate() //////////");
-		boolean result = false;
+		int classNum = dto.getClassNum();
 		
 		// 개행 <br> 추가
 		String content = dto.getContent().replace("\n", "<br>");
 		String aboutMe = dto.getAboutMe().replace("\n", "<br>");
 		String information = dto.getInformation().replace("\n", "<br>");
-		
 		dto.setContent(content);
 		dto.setAboutMe(aboutMe);
 		dto.setInformation(information);
@@ -360,7 +357,6 @@ public class onedayClassController {
 		String image3 = ""; 
 		String image4 = ""; 
 		String image5 = "";
-		
 		
 		// LayerSelect에 따른 image값 저장
 		if(dto.getLayerSelect().equals("A")) { 
@@ -389,15 +385,28 @@ public class onedayClassController {
 		}
 		System.out.println("////////// ClassUpdate(2) //////////");
 		
-		// 이미지를 업로드 하지 않은 경우
-		if(image1.equals("")) {
-			System.out.println("=== No ImageFile! ===");
-			// !!!!!!!!!!  no class 업데이트 ///////////
-			int n = onedayClassService.onedayClassUpdate(dto);
-			if(n>0)
-				result = true;
-			System.out.println("////////// ClassUpdate(3) //////////");
+		// 이미지를 하나도 업로드 하지 않은 경우
+		if(image1.equals("") && image2.equals("") && image3.equals("") && image4.equals("") && image5.equals("")) {
+			System.out.println("=== No ImageFile! ===");			
+			// onedayClass Update
+			onedayClassService.onedayClassUpdate(dto);
+			// noClass Update
+			noClassDateService.deleteNoClassDate(dto);
+			noClassDateDto noClass = new noClassDateDto();
+			noClass.setClassNum(classNum);
+			  if (dto.getNoClass() == "") {
+				  noClass.setNoClassDate("1991-04-02");
+			  } 
+			  else {
+				  List<String> list = NoClassUtil.getNoClassList(dto.getStartDate(), dto.getEndDate(), dto.getNoClass());
+				  for (String noDate : list) {
+					  System.out.println("=== noClassDate : " +noDate+" ===");
+					  noClass.setNoClassDate(noDate);
+					  noClassDateService.addNoClassDate(noClass);
+				  }
+			  }
 		}
+		//이미지를 하나라도 업로드했다면
 		else {
 			// FewFileName Setting
 			String newFilename1 = FileUploadUtiles.getNewFilename(image1, 1); 
@@ -417,34 +426,50 @@ public class onedayClassController {
 			System.out.println("Img Path : "+ filepath1); 
 			String myPath = "http://localhost:3000//upload//";
 			
-			// dto에 파일경로+이름 저장
-			dto.setImage1(myPath+newFilename1);
-			dto.setImage2(myPath+newFilename2); 
-			dto.setImage3(myPath+newFilename3);
-			dto.setImage4(myPath+newFilename4); 
-			dto.setImage5(myPath+newFilename5);
+			System.out.println("/// 파일이름 체크(1) ///");
+			System.out.println("1 = "+image1);
+			System.out.println("2 = "+image2);
+			System.out.println("3 = "+image3);
+			System.out.println("4 = "+image4);
+			System.out.println("5 = "+image5);
+			 
+			System.out.println("/// 파일이름 체크(2) ///");
+			System.out.println("1 = "+newFilename1);
+			System.out.println("2 = "+newFilename2);
+			System.out.println("3 = "+newFilename3);
+			System.out.println("4 = "+newFilename4);
+			System.out.println("5 = "+newFilename5);
+			 
+			System.out.println("/// 파일이름 체크(3) ///");
+			System.out.println("1 = "+filepath1);
+			System.out.println("2 = "+filepath2);
+			System.out.println("3 = "+filepath3);
+			System.out.println("4 = "+filepath4);
+			System.out.println("5 = "+filepath5);
+
+			// 업로드한 이미지만 체크해서 DB셋팅 
+			if(!newFilename1.contains(".back")) {
+				System.out.println("1 success");
+				dto.setImage1(myPath+newFilename1);
+			}
+			if(!newFilename2.contains(".back")) {
+				dto.setImage2(myPath+newFilename2); 
+				System.out.println("2 success");
+			}
+			if(!newFilename3.contains(".back")) 
+				dto.setImage3(myPath+newFilename3);
+			if(!newFilename4.contains(".back")) 
+				dto.setImage4(myPath+newFilename4); 
+			if(!newFilename1.contains(".back")) 
+				dto.setImage5(myPath+newFilename5);
 			
-			 System.out.println("/// 파일이름 체크(1) ///");
-			 System.out.println(image1);
-			 System.out.println(image2);
-			 System.out.println(image3);
-			 System.out.println(image4);
-			 System.out.println(image5);
-			 
-			 System.out.println("/// 파일이름 체크(2) ///");
-			 System.out.println(newFilename1);
-			 System.out.println(newFilename2);
-			 System.out.println(newFilename3);
-			 System.out.println(newFilename4);
-			 System.out.println(newFilename5);
-			 
-			 System.out.println("/// 파일이름 체크(3) ///");
-			 System.out.println(filepath1);
-			 System.out.println(filepath2);
-			 System.out.println(filepath3);
-			 System.out.println(filepath4);
-			 System.out.println(filepath5);
-			 
+			System.out.println("/// 파일이름 체크(4) ///");
+			System.out.println("1 : "+dto.getImage1());
+			System.out.println("2 : "+dto.getImage2());
+			System.out.println("3 : "+dto.getImage3());
+			System.out.println("4 : "+dto.getImage4());
+			System.out.println("5 : "+dto.getImage5());
+			
 			try { 
 				// 파일 업로드
 				BufferedOutputStream os1 = new BufferedOutputStream(new FileOutputStream(new File(filepath1))); 
@@ -480,19 +505,29 @@ public class onedayClassController {
 				os5.close();
 				System.out.println("=== Image Upload Success! ===");
 
-				// DB 저장 
+				// onedayClass Update
 				onedayClassService.onedayClassUpdate(dto);
-
-				// !!!!!!!!!!  no class 업데이트 ///////////
+				// noClass Update
+				noClassDateService.deleteNoClassDate(dto);
+				noClassDateDto noClass = new noClassDateDto();
+				noClass.setClassNum(classNum);
+				  if (dto.getNoClass() == "") {
+					  noClass.setNoClassDate("1991-04-02");
+				  } 
+				  else {
+					  List<String> list = NoClassUtil.getNoClassList(dto.getStartDate(), dto.getEndDate(), dto.getNoClass());
+					  for (String noDate : list) {
+						  System.out.println("=== noClassDate : " +noDate+" ===");
+						  noClass.setNoClassDate(noDate);
+						  noClassDateService.addNoClassDate(noClass);
+					  }
+				  }
 			} 
 			catch (Exception e) { 
 				e.printStackTrace(); 
-				result = false;
 			}
-			result = true;
 		}
-		
-		return result;
+		return classNum;
 	}
 	
 	
