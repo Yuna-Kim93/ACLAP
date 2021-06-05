@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import bit.com.a.FileUploadUtiles;
 import bit.com.a.RadomPasswordUtil;
 import bit.com.a.dto.aclapMemberDto;
+import bit.com.a.dto.onedayClassDto;
 import bit.com.a.mail.MailSend;
 import bit.com.a.service.aclapMemberService;
 
@@ -273,6 +274,16 @@ public class aclapMemberController {
 		aclapMemberDto memDto = service.getMemberDto(dto);
 		
 		return memDto;
+	}
+	
+	//로그인시 노티 뱃지 show/hide 체크
+	@RequestMapping(value="/checkAlertBadge", method = {RequestMethod.GET, RequestMethod.POST})
+	public onedayClassDto checkAlertBadge(int memNum) {
+		System.out.println("checkAlertBadge() 메소드 도착 파라미터 확인==" +memNum);
+		onedayClassDto chkBadge = service.checkAlertBadge(memNum);
+		
+		return chkBadge;
+		
 	}
 	
 }
