@@ -75,14 +75,26 @@ public class scheduleService {
 	}
 	
 	public int participate(participateDto dto) {
+		// 이미 한번 신청한 일자인지 검사
+		int count = scheduleDao.getIncludSchedule(dto);
+		System.out.println("이미 신청했니? count = " + count);	
 		// 스케줄 추가
-		int i = scheduleDao.addSchedule(dto);
-		
+		int i = 0;
+		if(count > 0) {
+			i = scheduleDao.updateSchedule(dto);
+		}else {
+			i = scheduleDao.addSchedule(dto);	
+		}
 		// 스탬프 추가
 		int j = scheduleDao.addStamp(dto);
 		
 		// 영수증 추가
-		int z = scheduleDao.addReceipt(dto);
+		int z = 0;
+		if(count>0) {
+			z = scheduleDao.updateReceipt(dto);
+		}else {
+			z = scheduleDao.addReceipt(dto);
+		}
 		
 		return i*j*z;
 	}

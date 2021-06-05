@@ -23,14 +23,14 @@
 <select resultType="Integer" parameterType="bit.com.a.dto.scheduleDto" id="regiCount">
 	SELECT COUNT(*)
 	FROM SCHEDULE
-	WHERE RDATE &gt;= #{ rdate } AND MEMNUM = #{memNum} 
+	WHERE RDATE &gt;= #{ rdate } AND MEMNUM = #{memNum} AND DEL != 1
 </select>
 
 <!-- mypage.html에서 수강한 수업 count -->
 <select resultType="Integer" parameterType="bit.com.a.dto.scheduleDto" id="appendCount">
 	SELECT COUNT(*)
 	FROM SCHEDULE
-	WHERE RDATE &lt; #{ rdate } AND MEMNUM = #{memNum} 
+	WHERE RDATE &lt; #{ rdate } AND MEMNUM = #{memNum} AND DEL != 1
 </select>
 
 <!-- classDtail.html에서 classSchedule을 얻기 위함 nodate 제외-->
@@ -66,6 +66,22 @@ ORDER BY RDATE
 	ORDER BY RDATE
 </select>
 
+<!-- 이미 한번 신청한 일자인지 검사 -->
+<select id="getIncludSchedule" parameterType="bit.com.a.dto.participateDto" resultType="int">
+	SELECT COUNT(*)
+	FROM SCHEDULE
+	WHERE CLASSNUM = #{classNum}
+			 AND MEMNUM = #{memNum}
+				AND RDATE = #{classDate}
+</select>
+
+<!-- 이미 한번 신청한 사람이 다시 신청할 경우 del과 인원수 업데이트 -->
+<update id="updateSchedule" parameterType="bit.com.a.dto.participateDto">
+	UPDATE SCHEDULE
+	SET DEL = 0, PARTICIPANTS=#{participants}
+	WHERE RDATE=#{classDate} AND CLASSNUM=#{classNum} AND MEMNUM=#{memNum}  
+</update>
+
 <!-- 수업 신청 시 스케줄 추가 -->
 <insert id="addSchedule" parameterType="bit.com.a.dto.participateDto">
 	INSERT INTO SCHEDULE (SCHEDULENUM, RDATE, MEMNUM, CLASSNUM, PARTICIPANTS, DEL)
@@ -98,13 +114,20 @@ ORDER BY RDATE
 	WHERE RDATE=#{classDate} AND CLASSNUM=#{classNum} AND MEMNUM=#{memNum}  
 </update>
 
+<!-- 일정 취소 시 영수증 삭제 -->
+<update id="updateReceipt" parameterType="bit.com.a.dto.participateDto">
+	UPDATE RECEIPT
+	SET DEL=0, PAYDATE=SYSDATE, PRICE=#{rPoint}
+	WHERE CLASSDATE=#{classDate} AND CLASSNUM=#{classNum} AND MEMNUM=#{memNum} 
+</update>
+
 <!-- 일정 취소 시 도장 삭제 -->
 <delete id="deleteStamp" parameterType="bit.com.a.dto.participateDto">
 	DELETE FROM MYSTAMP 
-	WHERE classDate=#{classDate} AND CLASSNUM=#{classNum} AND MEMNUM=#{memNum}
+	WHERE CLASSDATE=#{classDate} AND CLASSNUM=#{classNum} AND MEMNUM=#{memNum}
 </delete>
 
-<!-- 로그인 한 사람이 해당 클래스에 이미 가입했는지 알기 위함 -->
+<!-- 로그인 한 사람이 해당 일자에 이미 가입했는지 알기 위함 -->
 <select id="getIncludMember" parameterType="bit.com.a.dto.scheduleDto" resultType="int">
 	SELECT COUNT(*)
 	FROM SCHEDULE
@@ -112,6 +135,5 @@ ORDER BY RDATE
 			AND DEL != 1
 				AND RDATE = #{rdate}
 </select>
-
 
 </mapper>
