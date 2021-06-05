@@ -13,4 +13,5 @@ import bit.com.a.dto.onedayClassDto;
 public interface noClassDateDao {
 	public int addNoClassDate(noClassDateDto dto);
 	public List<String> getNoClassDate(onedayClassDto dto);
+	public int deleteNoClassDate(onedayClassDto dto);
 }

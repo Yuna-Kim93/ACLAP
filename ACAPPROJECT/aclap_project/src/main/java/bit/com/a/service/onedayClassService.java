@@ -96,16 +96,15 @@ public class onedayClassService {
 		int n = onedayClassDao.onedayClassWrite(dto);
 		if(n>0)
 			System.out.println("=== onedayClassWrite Success ===");
-		List<Integer> classSeq = onedayClassDao.onedayClassWriteAfClassNum(dto);
+		List <Integer>  classSeq = onedayClassDao.onedayClassWriteAfClassNum(dto);
 		return classSeq.get(0);
 	};		
 	
 	// 클래스 수정하기
-	public int onedayClassUpdate(onedayClassDto dto) {
+	public void onedayClassUpdate(onedayClassDto dto) {
 		int n = onedayClassDao.onedayClassUpdate(dto);
 		if(n>0)
 			System.out.println("=== onedayClassUpdate Success ===");
-		return n;
 	};
 	
 	// 클래스 수정 전 뿌려줄 모든 정보 
