@@ -52,7 +52,7 @@ public class reviewController {
 			    for(MultipartFile file : files) {
 			    	//이미지 파일 이름
 			        String originalName = file.getOriginalFilename();
-			        String newFilename = FileUploadUtiles.getNewFilename1(originalName);
+			        String newFilename = FileUploadUtiles.getNewFilename(originalName, 1);
 			        
 			        String filepath = uploadPath + File.separator + newFilename;
 			        System.out.println("Img Path : "+ filepath);
@@ -195,7 +195,7 @@ public class reviewController {
 		    for(MultipartFile file : files) {
 		    	//이미지 파일 이름
 		        String originalName = file.getOriginalFilename();
-		        String newFilename = FileUploadUtiles.getNewFilename1(originalName);
+		        String newFilename = FileUploadUtiles.getNewFilename(originalName, 1);
 		        
 		        String filepath = uploadPath + File.separator + newFilename;
 		        System.out.println("Img Path : "+ filepath);

@@ -44,5 +44,7 @@ public interface aclapMemberDao {
 	public int minusMyPoint(participateDto dto);
 	// 포인트 가산
 	public int plusMyPoint(participateDto dto);
+	//노티뱃지유무확인
+	public onedayClassDto checkAlertBadge(int memNum);
 
 }
