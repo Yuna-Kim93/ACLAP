@@ -176,4 +176,10 @@ SELECT RDATE, PARTICIPANTS, USERNAME AS NAME, NICKNAME, PROFILEPIC, EMAIL
 FROM SCHEDULE S, ACLAPMEMBER A
 WHERE S.DEL =0 AND S.MEMNUM = A.MEMNUM AND S.CLASSNUM=#{classNum}
 </select>
+
+<!-- 내가 개설한 클래스 클릭시 OldRegNum을 NewRegNum과 동일한 값으로 update -->
+<update id="updateOldRegNum" parameterType="int">
+	UPDATE ONEDAYCLASS SET OLDREGNUM = NEWREGNUM
+	WHERE CLASSNUM = #{classNum}
+</update>
 </mapper>
