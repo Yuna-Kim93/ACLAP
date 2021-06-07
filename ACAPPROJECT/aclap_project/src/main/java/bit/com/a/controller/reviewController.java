@@ -235,7 +235,12 @@ public class reviewController {
 		    }else if (filenames.size() >= 4) {
 		    	return "error";
 		    }	    
-
+		    
+		    // 텍스트 개행
+		    String content = dto.getrContent().replace("\n", "<br>");
+		    dto.setrContent(content);		    
+		    
+		    
 		    rService.updateReview(dto);
 		    System.out.println(dto);
 		    
@@ -272,12 +277,19 @@ public class reviewController {
 		
 		// 리뷰작성 가능 여부
 		@RequestMapping(value = "/checkMember", method = {RequestMethod.GET, RequestMethod.POST})
-		public int checkMember(scheduleDto dto) {
+		public boolean checkMember(scheduleDto dto) {
 			System.out.println("checkMember = " + dto.toString());
 			
-			int count = rService.checkMember(dto);
-			
-			return count;
+			int count1 = rService.checkMember(dto);	// 리뷰 작성 갯수
+			int count2 = rService.checkReview(dto);	// 리뷰 작성 가능 갯수
+			System.out.println("count1 = " + count1 + ", count2 =" +count2);
+			if(count1 == count2 ) {	// 작성 불가
+				System.out.println("false");
+				return false;
+			}else {	// 작성 가능
+				System.out.println("true");
+				return true;
+			}
 		}
 		
 		// 리뷰 삭제 
