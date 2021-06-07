@@ -21,6 +21,7 @@
 	FROM ONEDAYCLASS O, ACLAPMEMBER A
 	WHERE O.MASTERNUM = A.MEMNUM
 	AND A.EMAIL = #{email}
+		AND O.DEL = 0
 </select>
 
 <!-- 클래스 리스트 정렬 -->
