@@ -128,6 +128,13 @@ public class adminController {
 			return count;
 		}
 		
+		@RequestMapping(value = "/userCount", method = {RequestMethod.GET, RequestMethod.POST})
+		public int userCount(onedayParam par) {
+			System.out.println("userCount userCount()" + new Date());
+			int count = aclapMemberService.userCount(par);
+			return count;
+		}
+		
 		
 		
 }
