@@ -54,6 +54,8 @@ public class reviewController {
 			        String originalName = file.getOriginalFilename();
 			        String newFilename = FileUploadUtiles.getNewFilename(originalName, 1);
 			        
+			 
+			        
 			        String filepath = uploadPath + File.separator + newFilename;
 			        System.out.println("Img Path : "+ filepath);
 					
@@ -67,15 +69,11 @@ public class reviewController {
 					os.close();
 			         
 			    }	     
-		
+			       		
 
 			  //dto 이미지경로 세팅
-			    if (filenames.size() == 0) {
-			    	dto.setImage1("");
-			    	dto.setImage2("");
-			    	dto.setImage3("");
-			    }
-			    else if (filenames.size() == 1) {
+			  
+			     if (filenames.size() == 1) {
 			    	dto.setImage1(filenames.get(0));
 			    	dto.setImage2("");
 			    	dto.setImage3("");
