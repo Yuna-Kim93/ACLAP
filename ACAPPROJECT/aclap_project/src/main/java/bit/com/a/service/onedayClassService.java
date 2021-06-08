@@ -141,4 +141,6 @@ public class onedayClassService {
 		System.out.println("updateOldRegNum도착");
 		return onedayClassDao.getMyClassParticipants(classNum);
 	}
+
+	
 }

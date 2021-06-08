@@ -35,30 +35,28 @@ FROM (SELECT R.CLASSNUM, AVG(STARPOINT) AS AVGPOINT
         WHERE R.CLASSNUM = O.CLASSNUM AND O.PRIMARYCATEGORY LIKE '%'||#{primaryCategory}||'%' 
         GROUP BY R.CLASSNUM) R, ONEDAYCLASS O
 
-<if test="choice == null or choice == '' and search == null or search == ''">
+
 WHERE R.CLASSNUM = O.CLASSNUM AND O.DEL=0 AND O.ENDDATE > SYSDATE 
-ORDER BY O.LIKECOUNT DESC 
-</if>
+
+
 <if test="choice != null and choice != '' and search != null or search ==''">
 
 <if test="choice == 'orderByLike'">
-WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' AND O.DEL=0 AND O.ENDDATE > SYSDATE 
-ORDER BY O.LIKECOUNT DESC</if>
+AND R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' AND O.DEL=0 </if>
 
 <if test="choice == 'orderByRecent'">
-WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' 
-AND O.DEL=0 AND O.ENDDATE > SYSDATE 
-ORDER BY O.CLASSNUM DESC</if>
+AND R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%' 
+</if>
 
 <if test="choice == 'orderByAvg'">
-WHERE R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%'
-AND O.DEL=0 AND O.ENDDATE > SYSDATE 
-ORDER BY AVGPOINT DESC 
+AND R.CLASSNUM = O.CLASSNUM AND O.TITLE LIKE '%'||#{search}||'%'
+
+
 
 </if>
 
 </if>
-
+ORDER BY O.LIKECOUNT DESC 
 </select>
 
 

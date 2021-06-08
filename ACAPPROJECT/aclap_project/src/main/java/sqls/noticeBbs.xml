@@ -35,15 +35,15 @@ ORDER BY ANSWER ASC
 
 
 <select resultType="java.lang.Integer" parameterType="bit.com.a.dto.noticeBbsParam" id="noticeListCount">
-SELECT NVL(COUNT(*), 0) FROM NOTICEBBS WHERE 1=1 
-
+SELECT COUNT(*) FROM NOTICEBBS N, ACLAPMEMBER A
+WHERE 1=1 AND A.MEMNUM = N.MEMNUM
 <if test="choice != null and choice != '' and search != null and search != ''">
 
 <if test="choice == 'title'">AND NTITLE LIKE '%'||#{search}||'%' </if>
 
 <if test="choice == 'content'">AND NCONTENT LIKE '%'||#{search}||'%' </if>
 
-<if test="choice == 'writer'">AND USERNAME=#{search} </if>
+<if test="choice == 'writer'">AND A.USERNAME = #{search} </if>
 
 </if>
 
