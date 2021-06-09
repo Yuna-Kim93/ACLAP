@@ -95,6 +95,7 @@ public class reviewController {
 				return "uploaded";
 			}
 
+
 		// 리뷰 리스트
 		@RequestMapping(value = "/getReviewList", method = RequestMethod.GET)
 		public List<reviewDto> getReviewList(reviewDto dto){
@@ -188,16 +189,28 @@ public class reviewController {
 		public Map<String, Object> getRatingAvg(int classNum) {
 			System.out.println("reviewController 클래스별 별점 평균() "+ new Date());
 			System.out.println("클래스 번호(classNum)" + classNum);
+
+			Map<String, Object> map = new HashMap<String, Object>(); 		
+			reviewDto dto = new reviewDto();
+			double avg = 0;
+			reviewDto sAvg = new reviewDto();
 			
-			Map<String, Object> map = new HashMap<String, Object>(); 
-			//클래스 총 별점 평균
-			double avg = rService.getRatingAvg(classNum);
-			
-			// 클래스 항목별 별점 평균
-			reviewDto sAvg = rService.getStarsAvg(classNum);
+			dto.setClassNum(classNum);
+			// 리뷰 유무 확인 
+			List <reviewDto> check = rService.getReviewList(dto);
+			if(check.size()==0) {
+				System.out.println("/// Review Null ///");
+				
+			}
+			else {
+				//클래스 총 별점 평균
+				avg = rService.getRatingAvg(classNum);
+				// 클래스 항목별 별점 평균
+				sAvg = rService.getStarsAvg(classNum);
+			}
+			System.out.println(sAvg.toString());
 			map.put("avg", avg);
 			map.put("sAvg", sAvg);
-			
 			
 			return map;
 		}
