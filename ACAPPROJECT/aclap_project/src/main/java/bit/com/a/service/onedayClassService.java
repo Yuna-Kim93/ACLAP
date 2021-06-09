@@ -123,15 +123,13 @@ public class onedayClassService {
 		return n;
 	};
 	
-	// 클래스 삭제 
-	public int onedayClassMasterDel(int classNum) {
-		int n = onedayClassDao.onedayClassMasterDel(classNum);
+	// 클래스 재개하기
+	public int onedayClassRestart(onedayClassDto dto) {
+		int n = onedayClassDao.onedayClassRestart(dto);
 		if(n>0)
-			System.out.println("=== onedayClassMasterDel Success ===");
+			System.out.println("=== onedayClassDelete Success ===");
 		return n;
 	};
-
-	
 	
 	
 	// 참여자 수를 NewRegNum에 update
