@@ -66,4 +66,10 @@ INSERT INTO NOTICEBBS (NOTICENUM, MEMNUM, NTITLE, NCONTENT, WDATE, DEL, ANSWER)
 VALUES (SEQ_NOTICEBBS.NEXTVAL, #{memNum}, #{nTitle}, #{nContent}, SYSDATE, 0, 0)
 </insert>
 
+<select id="noAnserNoticeCount" resultType="int">
+	SELECT COUNT(*)
+	FROM NOTICEBBS
+	WHERE ANSWER=0
+</select>
+
 </mapper>
