@@ -147,7 +147,7 @@ ORDER BY O.LIKECOUNT DESC
 <update id="onedayClassUpdate" parameterType="bit.com.a.dto.onedayClassDto">
 		UPDATE ONEDAYCLASS 
 		SET PRIMARYCATEGORY=#{primaryCategory}, SECONDARYCATEGORY=#{secondaryCategory}, TITLE=#{title}, STARTDATE=#{startDate},	ENDDATE=#{endDate}, 
-			PRICE=#{price}, DURATION=#{duration}, LIMITNUM=#{limitNum}, PREPARATION=#{preparation}, ABOUTME=#{aboutMe}, 
+			PRICE=#{price}, DURATION=#{duration}, LIMITNUM=#{limitNum}, PREPARATION=#{preparation}, ABOUTME=#{aboutMe}, DEL=0
 		 	<if test="image1 != null">IMAGE1=#{image1},</if>
 		 	<if test="image2 != null">IMAGE2=#{image2},</if>
 		 	<if test="image3 != null">IMAGE3=#{image3},</if>
@@ -158,13 +158,18 @@ ORDER BY O.LIKECOUNT DESC
 		WHERE CLASSNUM=#{classNum}	
 </update> 
 
-<!-- 클래스 삭제(숨기기) -->
-<update id="onedayClassDelete" parameterType="bit.com.a.dto.participateDto">
+<!-- 클래스 중단(유저) -->
+<update id="onedayClassDelete" parameterType="bit.com.a.dto.onedayClassDto">
 	UPDATE ONEDAYCLASS 
 	SET DEL=1
 	WHERE CLASSNUM = #{classNum}
 </update>
 
+<!-- 클래스 삭제(관리자) -->
+<delete id="onedayClassMasterDel" parameterType="java.lang.Integer">
+	DELETE FROM ONEDAYCLASS
+	WHERE CLASSNUM = #{classNum}
+</delete>
 
 <update id="updateNewRegNum" parameterType="bit.com.a.dto.participateDto">
 	UPDATE ONEDAYCLASS SET NEWREGNUM = NEWREGNUM + 1
