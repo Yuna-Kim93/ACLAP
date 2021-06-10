@@ -64,7 +64,7 @@ public class onedayClassController {
 	// TODO 문의메일 발송
 	@RequestMapping(value = "/contactMail", method = RequestMethod.POST)
 	public boolean contactMail(String name, String mail, String content) {
-		System.out.println("///// MemberController emailSend() /////");
+		System.out.println("///// MemberController contactMail() /////");
 		System.out.println("이름 : " + name);
 		System.out.println("메일 : " + mail);
 		System.out.println("내용 : " + content);
