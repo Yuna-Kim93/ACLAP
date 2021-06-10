@@ -160,11 +160,18 @@ ORDER BY O.LIKECOUNT DESC
 		WHERE CLASSNUM=#{classNum}	
 </update> 
 
-<!-- 클래스 중단 -->
+<!-- 클래스 중단 (classNum)-->
 <update id="onedayClassDelete" parameterType="bit.com.a.dto.onedayClassDto">
 	UPDATE ONEDAYCLASS 
 	SET DEL=1
 	WHERE CLASSNUM = #{classNum}
+</update>
+
+<!-- 클래스 중단 (memNum) -->
+<update id="onedayClassDelete2" parameterType="bit.com.a.dto.aclapMemberDto">
+	UPDATE ONEDAYCLASS 
+	SET DEL=1
+	WHERE MASTERNUM=#{memNum}
 </update>
 
 <!-- 클래스 재개 -->
@@ -202,16 +209,16 @@ ORDER BY RDATE
 	WHERE CLASSNUM = #{classNum}
 </update>
 
+
 <!-- (관리자페이지) 원데이 클래스 리스트 -->
 <select id="getClassList" parameterType="bit.com.a.dto.onedayParam" resultType="bit.com.a.dto.onedayClassDto">
 SELECT CLASSNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, STARTDATE, ENDDATE, LOCATION, DEL
-   FROM (SELECT ROW_NUMBER()OVER(ORDER BY CLASSNUM DESC) AS RNUM, 
-                  CLASSNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, STARTDATE, ENDDATE, LOCATION, DEL
-               FROM ONEDAYCLASS
-               WHERE 1=1      
-               AND INSTRUCTOR LIKE '%'||#{name}||'%'            
-            ORDER BY CLASSNUM DESC)
-         WHERE RNUM BETWEEN ${start} AND ${end}
+FROM (SELECT ROW_NUMBER()OVER(ORDER BY CLASSNUM DESC) AS RNUM, 
+               CLASSNUM, INSTRUCTOR, PRIMARYCATEGORY, SECONDARYCATEGORY, TITLE, STARTDATE, ENDDATE, LOCATION, DEL
+      FROM ONEDAYCLASS
+      WHERE 1=1 AND INSTRUCTOR LIKE '%'||#{name}||'%'            
+      ORDER BY CLASSNUM DESC)
+WHERE RNUM BETWEEN ${start} AND ${end}
 </select>
 
 <!-- (관리자페이지) 클래수 총수 -->

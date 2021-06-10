@@ -65,8 +65,11 @@ public interface onedayClassDao {
 		// 클래스 수정하기
 		public int onedayClassUpdate(onedayClassDto dto);
 		
-		// 클래스 중단하기
+		// 클래스 중단하기 (ClassNum)
 		public int onedayClassDelete(onedayClassDto dto);
+		
+		// 클래스 중단하기 (MasterNum)
+		public int onedayClassDelete2(aclapMemberDto dto);
 		
 		// 클래스 재개하기
 		public int onedayClassRestart(onedayClassDto dto);

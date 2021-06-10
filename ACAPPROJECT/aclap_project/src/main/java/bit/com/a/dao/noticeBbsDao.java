@@ -24,4 +24,6 @@ public interface noticeBbsDao {
 	public int writeNotisBbs(noticeBbsDto dto);
 
 	public int noAnserNoticeCount();
+	
+	public int delnoticeBbs(aclapMemberDto dto);
 }
