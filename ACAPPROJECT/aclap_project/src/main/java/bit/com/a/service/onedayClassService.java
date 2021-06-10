@@ -149,5 +149,10 @@ public class onedayClassService {
 		return onedayClassDao.getMyClassParticipants(classNum);
 	}
 
+	// endDate가 지난 클래스를 del=1로 처리
+	public int updateEndClass() {
+		return onedayClassDao.updateEndClass();
+	}
+
 	
 }

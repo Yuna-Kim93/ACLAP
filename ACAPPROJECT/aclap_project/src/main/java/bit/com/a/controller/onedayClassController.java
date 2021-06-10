@@ -550,4 +550,14 @@ public class onedayClassController {
 			result = true;
 		return result;
 	}
+	
+	// endDate가 지난 클래스를 del=1로 처리
+	@RequestMapping(value = "/updateEndClass", method = { RequestMethod.GET, RequestMethod.POST })
+	public int updateEndClass() {
+		System.out.println("updateEndClass");
+		
+		int count = onedayClassService.updateEndClass();
+		
+		return count;
+	}
 }
