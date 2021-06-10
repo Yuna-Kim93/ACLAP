@@ -149,7 +149,7 @@ ORDER BY O.LIKECOUNT DESC
 <update id="onedayClassUpdate" parameterType="bit.com.a.dto.onedayClassDto">
 		UPDATE ONEDAYCLASS 
 		SET PRIMARYCATEGORY=#{primaryCategory}, SECONDARYCATEGORY=#{secondaryCategory}, TITLE=#{title}, STARTDATE=#{startDate},	ENDDATE=#{endDate}, 
-			PRICE=#{price}, DURATION=#{duration}, LIMITNUM=#{limitNum}, PREPARATION=#{preparation}, ABOUTME=#{aboutMe}, DEL=0
+			PRICE=#{price}, DURATION=#{duration}, LIMITNUM=#{limitNum}, PREPARATION=#{preparation}, ABOUTME=#{aboutMe}, DEL=0,
 		 	<if test="image1 != null">IMAGE1=#{image1},</if>
 		 	<if test="image2 != null">IMAGE2=#{image2},</if>
 		 	<if test="image3 != null">IMAGE3=#{image3},</if>
@@ -196,15 +196,15 @@ ORDER BY O.LIKECOUNT DESC
 </select>
 
 <!-- 내가 개설한 클래스 클릭시 참가자 보기 -->
-<select id="getMyClassParticipants" parameterType="int" resultType="bit.com.a.dto.scheduleDto">
+<select id="getMyClassParticipants" parameterType="bit.com.a.dto.participateDto" resultType="bit.com.a.dto.scheduleDto">
 SELECT RDATE, PARTICIPANTS, USERNAME AS NAME, NICKNAME, PROFILEPIC, EMAIL 
 FROM SCHEDULE S, ACLAPMEMBER A
-WHERE S.DEL =0 AND S.MEMNUM = A.MEMNUM AND S.CLASSNUM=#{classNum}
+WHERE S.DEL =0 AND S.MEMNUM = A.MEMNUM AND S.CLASSNUM=#{classNum} AND SUBSTR(S.RDATE, 1, 7)=#{ classDate }
 ORDER BY RDATE
 </select>
 
 <!-- 내가 개설한 클래스 클릭시 OldRegNum을 NewRegNum과 동일한 값으로 update -->
-<update id="updateOldRegNum" parameterType="int">
+<update id="updateOldRegNum" parameterType="bit.com.a.dto.participateDto">
 	UPDATE ONEDAYCLASS SET OLDREGNUM = NEWREGNUM
 	WHERE CLASSNUM = #{classNum}
 </update>

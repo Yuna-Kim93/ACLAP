@@ -80,9 +80,9 @@ public interface onedayClassDao {
 		//내가 개설한 클래스 정보 가져오기
 		public List<onedayClassDto> getMyClassList(int masterNum);
 		//내가 개설한 클래스 클릭시 참가자 보기
-		public List<aclapMemberDto> getMyClassParticipants(int classNum);
+		public List<aclapMemberDto> getMyClassParticipants(participateDto dto);
 		//내가 개설한 클래스 클릭시 OldRegNum을 NewRegNum과 동일한 값으로 update
-		public void updateOldRegNum(int classNum);
+		public void updateOldRegNum(participateDto dto);
 
 		//어드민 페이지 클래스 총수 조사
 		public int classCount(onedayParam par);
