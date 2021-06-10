@@ -72,4 +72,9 @@ VALUES (SEQ_NOTICEBBS.NEXTVAL, #{memNum}, #{nTitle}, #{nContent}, SYSDATE, 0, 0)
 	WHERE ANSWER=0
 </select>
 
+<delete id="delnoticeBbs" parameterType="bit.com.a.dto.aclapMemberDto">
+	DELETE FROM NOTICEBBS
+	WHERE MEMNUM = #{memNum}
+</delete>
+
 </mapper>
