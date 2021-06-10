@@ -83,6 +83,7 @@ public interface onedayClassDao {
 
 		//어드민 페이지 클래스 총수 조사
 		public int classCount(onedayParam par);
-		
-		
+
+		// endDate가 지난 클래스를 del=1로 처리
+		public int updateEndClass();
 }
