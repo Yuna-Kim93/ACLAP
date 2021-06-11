@@ -137,6 +137,9 @@ public class onedayClassController {
 		System.out.println("interest3 : " + dto.getInterest3());
 
 		List<onedayClassDto> list = onedayClassService.getRecommendClassList(dto);
+		for (onedayClassDto d : list) {
+			System.out.println(d.toString());
+		}
 		if (list.size() != 0)
 			System.out.println("getRecommendClassList Success");
 		return list;
@@ -343,7 +346,7 @@ public class onedayClassController {
 		
 		System.out.println("////////// onedayClassDto onedayClassUpdate() //////////");
 		int classNum = dto.getClassNum();
-		
+		System.out.println(dto.toString());
 		// 개행 <br> 추가
 		String content = dto.getContent().replace("\n", "<br>");
 		String aboutMe = dto.getAboutMe().replace("\n", "<br>");

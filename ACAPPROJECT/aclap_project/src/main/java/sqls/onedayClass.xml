@@ -113,9 +113,8 @@ ORDER BY O.LIKECOUNT DESC
 				SECONDARYCATEGORY LIKE '%'||#{interest1}||'%' OR 
 				SECONDARYCATEGORY LIKE '%'||#{interest2}||'%' OR 
 				SECONDARYCATEGORY LIKE '%'||#{interest3}||'%') 
-	WHERE RNUM BETWEEN 1 AND 9
+	WHERE RNUM BETWEEN 1 AND 6
 </select> 
-
 
 <!-- 클래스 만들기 -->
 <insert id="onedayClassWrite" parameterType="bit.com.a.dto.onedayClassDto">

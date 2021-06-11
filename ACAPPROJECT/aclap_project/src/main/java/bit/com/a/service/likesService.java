@@ -28,7 +28,7 @@ public class likesService {
 		return count1 * count2;
 	};
 	public int delLike(likesDto dto) {
-		int count1 = likesDao.addLike(dto);
+		int count1 = likesDao.delLike(dto);
 		int count2 = likesDao.minusClsLikeCount(dto);
 		return count1 * count2;
 	};
