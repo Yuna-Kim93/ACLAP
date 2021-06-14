@@ -158,15 +158,17 @@ public class onedayClassService {
 	// 강사의 모든 Like 수 가져오기
 	public int allLikesCount(int masterNum){
 		List<Integer> classNum =  onedayClassDao.teacherAllClass(masterNum);
+		System.out.println("/////////////////////////classNum" + classNum.toString());
 		int allLike = 0;
 		
 		for(int i=0; i<classNum.size(); i++) {
+			System.out.println("classNum = " + classNum.get(i));
 			likesDto d = new likesDto();
 			d.setClassNum(classNum.get(i));
 			d.setMemNum(masterNum);
 			
 			int tableCheck = likesDao.checkLike(d);
-			if(tableCheck != 0) 
+			if(tableCheck != 0 && classNum.get(i) != 1) 
 				allLike += likesDao.getLikeClassForDetail(classNum.get(i));
 		}
 		return allLike;
