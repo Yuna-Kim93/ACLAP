@@ -57,7 +57,7 @@ public class reviewController {
 			        String filepath = uploadPath + File.separator + newFilename;
 			        System.out.println("Img Path : "+ filepath);
 					
-			        String myPath = "http://localhost:3000//upload//"; // 출력용 
+			        String myPath = "http://192.168.0.230:3000//upload//"; // 출력용 
 			        
 			        filenames.add(myPath + newFilename);		        
 			        System.out.println(originalName);		 
